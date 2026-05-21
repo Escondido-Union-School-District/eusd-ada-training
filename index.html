@@ -43,29 +43,8 @@
     --shadow-md: 0 4px 12px rgba(20,17,15,0.08), 0 2px 4px rgba(20,17,15,0.04);
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #14110f;
-      --bg-elev: #1c1916;
-      --ink: #f5efe6;
-      --ink-soft: #c8c1b6;
-      --ink-mute: #9a9389;
-      --line: #3a342e;
-      --line-soft: #2a2622;
-      --accent: #e07b65;
-      --accent-ink: #14110f;
-      --good: #7fc093;
-      --good-bg: #1d3325;
-      --bad: #e9a094;
-      --bad-bg: #3a1f1a;
-      --warn: #e8c87a;
-      --warn-bg: #3a2e15;
-      --focus: #9bb8ff;
-    }
-  }
-
   *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { color-scheme: light; scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -397,16 +376,17 @@
     padding: 20px;
     background: var(--bg);
   }
-  .demo-render-cell h5 {
+  .demo-render-cell h3 {
     margin: 0 0 14px;
     font-family: var(--font-mono);
     font-size: 11px;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--ink-mute);
   }
-  .demo-render-cell.broken h5 { color: var(--bad); }
-  .demo-render-cell.fixed h5 { color: var(--good); }
+  .demo-render-cell.broken h3 { color: var(--bad); }
+  .demo-render-cell.fixed h3 { color: var(--good); }
   .demo pre {
     margin: 0;
     background: var(--code-bg);
@@ -767,7 +747,7 @@
     border-radius: var(--r-md);
     background: var(--bg-elev);
   }
-  .ro-cell h5 {
+  .ro-cell h3 {
     margin: 0 0 8px;
     font-family: var(--font-mono);
     font-size: 11px;
@@ -931,12 +911,12 @@
         <div class="demo-panel" id="p1-render" role="tabpanel" aria-labelledby="p1-tab-render">
           <div class="demo-render-pair">
             <div class="demo-render-cell broken">
-              <h5>Inaccessible</h5>
+              <h3>Inaccessible</h3>
               <div class="bad-clicky" onclick="alert('Clicked the div')">Delete</div>
               <p style="font-size:13px;margin:14px 0 0;color:var(--ink-mute);">Try tabbing to it. You can't. A div with an onclick handler is invisible to keyboards.</p>
             </div>
             <div class="demo-render-cell fixed">
-              <h5>Accessible</h5>
+              <h3>Accessible</h3>
               <button type="button" class="good-btn" onclick="alert('Clicked the button')">Delete</button>
               <p style="font-size:13px;margin:14px 0 0;color:var(--ink-mute);">Tab to it, press <kbd>Enter</kbd> or <kbd>Space</kbd>. It works.</p>
             </div>
@@ -1075,12 +1055,12 @@
         <div class="demo-panel" id="p3-render" role="tabpanel" aria-labelledby="p3-tab-render">
           <div class="demo-render-pair">
             <div class="demo-render-cell broken">
-              <h5>Inaccessible</h5>
+              <h3>Inaccessible</h3>
               <p style="margin:0;">Read our updated wellness policy. <a href="#" onclick="event.preventDefault()">Click here.</a></p>
               <p style="font-size:13px;margin:14px 0 0;color:var(--ink-mute);">A link list shows "click here" — destination unknown.</p>
             </div>
             <div class="demo-render-cell fixed">
-              <h5>Accessible</h5>
+              <h3>Accessible</h3>
               <p style="margin:0;">Read the <a href="#" onclick="event.preventDefault()">updated wellness policy</a> (PDF, 2 pages).</p>
               <p style="font-size:13px;margin:14px 0 0;color:var(--ink-mute);">Out of context, the link still tells you what it is.</p>
             </div>
@@ -1144,13 +1124,13 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
         <div class="demo-panel" id="p4-render" role="tabpanel" aria-labelledby="p4-tab-render">
           <div class="demo-render-pair">
             <div class="demo-render-cell broken">
-              <h5>Inaccessible</h5>
+              <h3>Inaccessible</h3>
               <p style="margin:0 0 6px;">Required fields are <span style="color:#c00;font-weight:600;">in red</span>.</p>
               <p style="margin:0;font-size:14px;">Name: <input class="bad-input" type="text" aria-label="Name (required, indicated by color only — intentionally bad example)" style="border-color:#c00;" /></p>
               <p style="font-size:13px;margin:14px 0 0;color:var(--ink-mute);">If you can't see red, you can't tell which fields are required.</p>
             </div>
             <div class="demo-render-cell fixed">
-              <h5>Accessible</h5>
+              <h3>Accessible</h3>
               <p style="margin:0 0 6px;">Required fields are marked with an asterisk (*) and in red.</p>
               <div class="good-input-group">
                 <label for="p4-name">Name <span aria-hidden="true" style="color:var(--accent);">*</span> <span class="sr-only">(required)</span></label>
@@ -1222,11 +1202,11 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
         <div class="demo-panel" id="p5-render" role="tabpanel" aria-labelledby="p5-tab-render">
           <div class="demo-render-pair">
             <div class="demo-render-cell broken">
-              <h5>Inaccessible — ~2.3:1</h5>
+              <h3>Inaccessible — ~2.3:1</h3>
               <div class="bad-low-contrast">This gray-on-near-white text fails AA for normal text (needs 4.5:1).</div>
             </div>
             <div class="demo-render-cell fixed">
-              <h5>Accessible — 14:1+</h5>
+              <h3>Accessible — 14:1+</h3>
               <div class="good-contrast">This text uses the page's ink color on the elevated background. Well above 4.5:1.</div>
             </div>
           </div>
@@ -1240,7 +1220,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
         </div>
       </div>
 
-      <h4 style="margin-top:28px;">Live contrast checker</h4>
+      <h3 style="margin-top:28px;">Live contrast checker</h3>
       <p>Paste in any foreground/background pair and see the verdict.</p>
       <div class="contrast-tool">
         <div class="contrast-controls">
@@ -1312,7 +1292,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
         <div class="demo-panel" id="p6-render" role="tabpanel" aria-labelledby="p6-tab-render">
           <div class="demo-render-pair">
             <div class="demo-render-cell broken">
-              <h5>Layout table (bad) and no headers (also bad)</h5>
+              <h3>Layout table (bad) and no headers (also bad)</h3>
               <div class="bad-tablish" role="presentation">
                 <div>School</div><div>Grade</div><div>Enrollment</div>
                 <div>Quantum Academy</div><div>K–8</div><div>412</div>
@@ -1321,7 +1301,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
               <p style="font-size:13px;margin:14px 0 0;color:var(--ink-mute);">Either a <code>&lt;table&gt;</code> used for layout, or a "table" of divs with no headers — both fail.</p>
             </div>
             <div class="demo-render-cell fixed">
-              <h5>Real data table with structure</h5>
+              <h3>Real data table with structure</h3>
               <table class="demo-table">
                 <caption>EUSD enrollment, sample</caption>
                 <thead>
@@ -1421,12 +1401,12 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
         <div class="demo-panel" id="p7-render" role="tabpanel" aria-labelledby="p7-tab-render">
           <div class="demo-render-pair">
             <div class="demo-render-cell broken">
-              <h5>Inaccessible</h5>
+              <h3>Inaccessible</h3>
               <input class="bad-input" type="text" placeholder="Email address" aria-label="(intentionally bad: placeholder only)" />
               <p style="font-size:13px;margin:14px 0 0;color:var(--ink-mute);">No label. Placeholder disappears on focus. <code>type="text"</code> instead of <code>email</code>.</p>
             </div>
             <div class="demo-render-cell fixed">
-              <h5>Accessible</h5>
+              <h3>Accessible</h3>
               <div class="good-input-group">
                 <label for="p7-email">Email address <span aria-hidden="true" style="color:var(--accent);">*</span><span class="sr-only">(required)</span></label>
                 <input id="p7-email" type="email" autocomplete="email" required class="good-input" placeholder="you@example.com" aria-describedby="p7-email-help" />
@@ -1809,7 +1789,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
       <span class="point-block-label">See it</span>
       <div class="reading-order-demo">
         <div class="ro-cell">
-          <h5>Bad — visual ≠ source order</h5>
+          <h3>Bad — visual ≠ source order</h3>
           <p style="font-size:13px;margin:0 0 10px;color:var(--ink-mute);">Visual: 1 → 2 → 3 → 4. Source: 3 → 1 → 4 → 2.</p>
           <div class="ro-block bad">3. Source position 3 (shown first visually)</div>
           <div class="ro-block bad">1. Source position 1 (shown second)</div>
@@ -1818,7 +1798,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
           <p style="font-size:13px;margin:10px 0 0;color:var(--ink-mute);">A screen reader reads "3, 1, 4, 2." Nothing makes sense.</p>
         </div>
         <div class="ro-cell">
-          <h5>Good — visual = source order</h5>
+          <h3>Good — visual = source order</h3>
           <p style="font-size:13px;margin:0 0 10px;color:var(--ink-mute);">Visual: 1 → 2 → 3 → 4. Source: 1 → 2 → 3 → 4.</p>
           <div class="ro-block good">1. First in source, first visually</div>
           <div class="ro-block good">2. Second in source, second visually</div>
