@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Run an Accessibility Audit, a Worked Example, EUSD Web Standards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #fafaf7;
+    --bg-elev: #ffffff;
+    --ink: #14110f;
+    --ink-soft: #4a4641;
+    --ink-mute: #6b6660;
+    --line: #d9d5cf;
+    --line-soft: #e8e5df;
+    --accent: #b8341a;
+    --accent-ink: #ffffff;
+    --good: #1f6b3a;
+    --good-bg: #e3f1e7;
+    --bad: #a8200c;
+    --bad-bg: #f7e2dd;
+    --warn: #7a5400;
+    --warn-bg: #fbeccd;
+    --code-bg: #181614;
+    --code-ink: #f5efe6;
+    --code-comment: #9e978a;
+    --code-key: #e8b34a;
+    --code-str: #87b48a;
+    --code-good: #8fcf9a;
+    --focus: #1d4ed8;
+
+    --font-display: 'Inter Tight', system-ui, sans-serif;
+    --font-body: 'Inter Tight', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    --r-sm: 4px;
+    --r-md: 8px;
+    --r-lg: 14px;
+
+    --shadow-sm: 0 1px 2px rgba(20,17,15,0.06), 0 1px 3px rgba(20,17,15,0.04);
+    --shadow-md: 0 4px 12px rgba(20,17,15,0.08), 0 2px 4px rgba(20,17,15,0.04);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { color-scheme: light; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  :focus { outline: none; }
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: var(--r-sm);
+  }
+
+  .skip-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 12px 18px;
+    font-weight: 600;
+    text-decoration: none;
+    transform: translateY(-110%);
+    transition: transform 0.15s ease;
+    z-index: 1000;
+  }
+  .skip-link:focus { transform: translateY(0); }
+
+  .page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* Header */
+  header.masthead {
+    border-bottom: 1px solid var(--line);
+    padding: 28px 0 24px;
+  }
+  .masthead-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .brand span { color: var(--accent); }
+  .masthead-meta {
+    color: var(--ink-mute);
+    font-size: 14px;
+    font-family: var(--font-mono);
+  }
+
+  /* Hero */
+  .hero {
+    padding: 52px 0 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    margin: 0 0 20px;
+    max-width: 18ch;
+  }
+  .lede {
+    font-size: 20px;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0 0 8px;
+  }
+
+  /* Sections */
+  section.module {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  section.module:last-of-type { border-bottom: none; }
+  .module-num {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 14px;
+    margin-bottom: 8px;
+    display: block;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    letter-spacing: -0.015em;
+    margin: 0 0 14px;
+    max-width: 26ch;
+  }
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin: 30px 0 12px;
+    letter-spacing: -0.01em;
+  }
+  p { margin: 0 0 16px; max-width: 72ch; }
+  ul, ol { max-width: 72ch; padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+  a:hover { text-decoration-thickness: 2.5px; }
+  strong { font-weight: 600; }
+
+  .inline-code {
+    background: var(--line-soft);
+    padding: 2px 6px;
+    border-radius: var(--r-sm);
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    color: var(--ink);
+  }
+  kbd {
+    background: var(--bg-elev);
+    border: 1px solid var(--line);
+    border-bottom-width: 2px;
+    border-radius: var(--r-sm);
+    padding: 2px 6px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink);
+  }
+
+  /* Claude Code CLI command block */
+  .cli {
+    margin: 20px 0;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    background: var(--bg-elev);
+    box-shadow: var(--shadow-sm);
+  }
+  .cli-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .cli-badge {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--accent-ink);
+    background: var(--accent);
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+  .cli-screen {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    padding: 16px 20px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+  .cli-line { display: block; white-space: pre-wrap; }
+  .cli-caret {
+    color: var(--code-key);
+    font-weight: 700;
+    margin-right: 10px;
+    user-select: none;
+  }
+  .cli-screen .c { color: var(--code-comment); }
+  .cli-screen .out { color: var(--code-ink); opacity: 0.92; }
+  .cli-screen .key { color: var(--code-key); }
+  .cli-screen .ok { color: var(--code-good); }
+
+  /* Audit report mock */
+  .report {
+    margin: 20px 0;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    background: var(--bg-elev);
+    box-shadow: var(--shadow-sm);
+  }
+  .report-head {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg);
+  }
+  .report-head h4 {
+    margin: 0 0 4px;
+    font-size: 1.05rem;
+    font-family: var(--font-display);
+  }
+  .report-head p { margin: 0; font-size: 14px; color: var(--ink-mute); }
+  .report-group { padding: 8px 20px 16px; }
+  .report-group h5 {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 18px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sev {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 3px 9px;
+    border-radius: 100px;
+    text-transform: uppercase;
+  }
+  .sev.critical { background: var(--bad-bg); color: var(--bad); }
+  .sev.serious { background: var(--warn-bg); color: var(--warn); }
+  .sev.moderate { background: var(--line-soft); color: var(--ink-soft); }
+  .count { color: var(--ink-mute); font-weight: 400; }
+
+  .finding {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .finding li {
+    padding: 10px 0 10px 0;
+    border-top: 1px solid var(--line-soft);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 4px 14px;
+    align-items: baseline;
+  }
+  .finding li:first-child { border-top: none; }
+  .finding .wcag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-mute);
+    white-space: nowrap;
+  }
+  .finding .what { font-size: 15px; }
+  .finding .what strong { color: var(--ink); }
+  @media (max-width: 540px) {
+    .finding li { grid-template-columns: 1fr; gap: 2px; }
+    .finding .wcag { white-space: normal; }
+  }
+
+  /* Callouts */
+  .callout {
+    border-left: 3px solid var(--accent);
+    background: var(--bg-elev);
+    padding: 18px 22px;
+    margin: 20px 0;
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+    box-shadow: var(--shadow-sm);
+  }
+  .callout.warn { border-left-color: var(--warn); background: var(--warn-bg); }
+  .callout-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 6px;
+    display: block;
+  }
+  .callout.warn .callout-label { color: var(--warn); }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* Step list */
+  .steps { counter-reset: step; list-style: none; padding: 0; margin: 24px 0; }
+  .steps > li {
+    counter-increment: step;
+    position: relative;
+    padding: 4px 0 24px 52px;
+    border-left: 2px solid var(--line);
+    margin-left: 16px;
+  }
+  .steps > li:last-child { border-left-color: transparent; padding-bottom: 0; }
+  .steps > li::before {
+    content: counter(step);
+    position: absolute;
+    left: -17px;
+    top: -2px;
+    width: 32px;
+    height: 32px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+  }
+  .steps > li h3 { margin: 2px 0 8px; font-size: 1.15rem; }
+
+  /* Mode cards */
+  .modes {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+  }
+  .mode {
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    padding: 18px 20px;
+    background: var(--bg-elev);
+  }
+  .mode h3 { margin: 0 0 6px; font-size: 1.1rem; }
+  .mode p { margin: 0 0 12px; font-size: 15px; color: var(--ink-soft); }
+  .mode .ex {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    background: var(--code-bg);
+    color: var(--code-ink);
+    padding: 10px 14px;
+    border-radius: var(--r-sm);
+    display: block;
+  }
+  .mode .ex .cli-caret { color: var(--code-key); }
+
+  footer {
+    padding: 40px 0 60px;
+    color: var(--ink-mute);
+    font-size: 14px;
+    border-top: 1px solid var(--line);
+  }
+  footer p { margin: 0 0 8px; max-width: none; }
+  footer a { color: var(--accent); }
+
+  .backlink {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<div class="page">
+
+<header class="masthead">
+  <div class="masthead-row">
+    <a class="brand" href="index.html">The <span>15</span> Checkpoints</a>
+    <div class="masthead-meta">EUSD IT · worked example</div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-title">
+  <p class="eyebrow">Hands-on walkthrough</p>
+  <h1 id="hero-title">Run an accessibility audit, start to finish</h1>
+  <p class="lede">
+    A step-by-step walkthrough of the ada-wcag plugin auditing a real page. You point Claude at an example registration page that was built with deliberate accessibility problems, type one command, and watch it find every issue and fix them one at a time. Follow along on your own machine.
+  </p>
+  <a class="backlink" href="index.html">Back to the 15 checkpoints</a>
+</section>
+
+<!-- WHAT YOU NEED -->
+<section class="module" aria-labelledby="need-title">
+  <span class="module-num">Before you start</span>
+  <h2 id="need-title">What you need</h2>
+  <ul>
+    <li><strong>Claude Code</strong> installed and working in a terminal.</li>
+    <li><strong>The ada-wcag plugin installed.</strong> If you have not done that yet, the two install commands are on the <a href="index.html#plugin-title">main training page</a>. It takes about a minute.</li>
+    <li><strong>The example page.</strong> Download <a href="demos/spring-family-night-inaccessible.html" download>spring-family-night-inaccessible.html</a> and save it to a folder of its own (for example a new <code class="inline-code">audit-demo</code> folder).</li>
+  </ul>
+</section>
+
+<!-- THE EXAMPLE -->
+<section class="module" aria-labelledby="example-title">
+  <span class="module-num">The example page</span>
+  <h2 id="example-title">A page built to fail</h2>
+  <p>
+    The example is a fictional <strong>Spring Family Night registration page</strong> for "Lincoln Elementary." It looks finished: a hero banner, an event schedule, a highlights video, and a sign-up form. Underneath the nice styling, it was seeded with the kinds of accessibility problems that show up on real district pages.
+  </p>
+  <div class="callout warn">
+    <span class="callout-label">Intentionally broken</span>
+    <p>This page is a practice target. It is <strong>not</strong> a real EUSD page and is not a model to copy. Every accessibility problem in it is there on purpose so the plugin has something to find. Do not reuse its code.</p>
+  </div>
+  <p>A few of the problems hiding in it: form fields with no labels, a "button" that a keyboard cannot reach, a video with no captions, text that disappears when you zoom in, and a required field marked only by a red border. You do not need to find these yourself. That is the plugin's job.</p>
+</section>
+
+<!-- THE WALKTHROUGH -->
+<section class="module" aria-labelledby="walk-title">
+  <span class="module-num">The walkthrough</span>
+  <h2 id="walk-title">Auditing the page, step by step</h2>
+
+  <ol class="steps">
+    <li>
+      <h3>Open the folder in Claude Code</h3>
+      <p>In your terminal, change into the folder where you saved the example page, then start Claude Code there.</p>
+      <div class="cli">
+        <div class="cli-label"><span class="cli-badge">Terminal</span> Your regular command line.</div>
+        <div class="cli-screen">
+          <span class="cli-line"><span class="cli-caret" aria-hidden="true">$</span>cd audit-demo</span>
+          <span class="cli-line"><span class="cli-caret" aria-hidden="true">$</span>claude</span>
+        </div>
+      </div>
+    </li>
+
+    <li>
+      <h3>Ask for an audit</h3>
+      <p>At the Claude prompt, type the audit request in plain language. The plugin recognizes this and switches into audit mode.</p>
+      <div class="cli">
+        <div class="cli-label"><span class="cli-badge">Claude Code</span> Type this at the Claude prompt, not your terminal.</div>
+        <div class="cli-screen">
+          <span class="cli-line"><span class="cli-caret" aria-hidden="true">&gt;</span>run accessibility audit</span>
+        </div>
+      </div>
+    </li>
+
+    <li>
+      <h3>Watch it scan the page</h3>
+      <p>Claude finds the HTML and its styles, then checks the page against the full WCAG 2.2 AA criteria list. It reads the source the way a screen reader and a keyboard would, not just how the page looks. After a few seconds it reports back.</p>
+      <div class="cli">
+        <div class="cli-label"><span class="cli-badge">Claude Code</span> What Claude prints back.</div>
+        <div class="cli-screen">
+          <span class="cli-line"><span class="c"># Found 1 HTML file: spring-family-night-inaccessible.html</span></span>
+          <span class="cli-line"><span class="c"># Styles: inline &lt;style&gt; block resolved</span></span>
+          <span class="cli-line"><span class="out">Auditing against WCAG 2.2 AA...</span></span>
+        </div>
+      </div>
+    </li>
+
+    <li>
+      <h3>Read the findings, grouped by severity</h3>
+      <p>The results come back sorted Critical first, then Serious, then Moderate, so you fix the things that block people before the things that just cause friction. Here is the real result for this page.</p>
+
+      <div class="report" role="group" aria-label="Audit results for the example page">
+        <div class="report-head">
+          <h4>Audit results: 17 issues</h4>
+          <p>5 critical · 6 serious · 6 moderate</p>
+        </div>
+
+        <div class="report-group">
+          <h5><span class="sev critical">Critical</span> <span class="count">blocks access, fix first</span></h5>
+          <ul class="finding">
+            <li><span class="wcag">1.3.1 / 3.3.2 / 4.1.2</span><span class="what"><strong>Form fields have no labels.</strong> All four registration inputs rely on placeholder text only, so a screen reader announces an empty field.</span></li>
+            <li><span class="wcag">2.1.1 / 4.1.2</span><span class="what"><strong>"Register Now" is a div, not a button.</strong> A keyboard cannot reach it or activate it, so keyboard and screen reader users cannot submit.</span></li>
+            <li><span class="wcag">1.2.2 / 1.2.3</span><span class="what"><strong>The video has no captions or transcript.</strong> Deaf and hard-of-hearing visitors get nothing from it.</span></li>
+            <li><span class="wcag">2.4.1</span><span class="what"><strong>No skip link.</strong> Keyboard users must tab through the whole header before reaching the content.</span></li>
+            <li><span class="wcag">1.4.1 / 3.3.2</span><span class="what"><strong>Required field shown by color only.</strong> The email field is marked required with just a red border, invisible to many users.</span></li>
+          </ul>
+        </div>
+
+        <div class="report-group">
+          <h5><span class="sev serious">Serious</span> <span class="count">significant barrier</span></h5>
+          <ul class="finding">
+            <li><span class="wcag">2.4.7</span><span class="what"><strong>Focus indicator removed everywhere.</strong> <code class="inline-code">*:focus { outline: none }</code> with no replacement, so keyboard users lose track of where they are.</span></li>
+            <li><span class="wcag">1.4.3</span><span class="what"><strong>Low-contrast intro text.</strong> Gray <code class="inline-code">#999</code> on white is about 2.8 to 1, below the 4.5 to 1 minimum.</span></li>
+            <li><span class="wcag">1.4.3</span><span class="what"><strong>Placeholder text used as labels.</strong> At <code class="inline-code">#c0c0c0</code> it is about 1.8 to 1, and it vanishes once typing starts.</span></li>
+            <li><span class="wcag">1.4.11</span><span class="what"><strong>Input borders too faint.</strong> About 1.6 to 1 against white, below the 3 to 1 minimum for controls.</span></li>
+            <li><span class="wcag">1.4.4 / 1.4.10</span><span class="what"><strong>Content clips when zoomed.</strong> A fixed-height hero with hidden overflow cuts off the date and time at 200 percent zoom, and fonts are set in fixed pixels.</span></li>
+            <li><span class="wcag">1.3.5</span><span class="what"><strong>No autocomplete on personal fields.</strong> Name, email, and phone lack autocomplete, so browsers and password managers cannot help.</span></li>
+          </ul>
+        </div>
+
+        <div class="report-group">
+          <h5><span class="sev moderate">Moderate</span> <span class="count">friction, fix after the rest</span></h5>
+          <ul class="finding">
+            <li><span class="wcag">2.4.4</span><span class="what"><strong>"Click here" link text.</strong> The calendar link reads "Click here," meaningless out of context, and repeats itself.</span></li>
+            <li><span class="wcag">1.3.1 / 2.4.6</span><span class="what"><strong>Heading levels skip.</strong> The page jumps from h1 to h4 and places an h3 out of order.</span></li>
+            <li><span class="wcag">1.3.1</span><span class="what"><strong>Schedule built from divs.</strong> The time-and-activity grid is styled divs, not a real table, so it is not navigable as data.</span></li>
+            <li><span class="wcag">1.3.2</span><span class="what"><strong>Reading order does not match the view.</strong> CSS <code class="inline-code">order</code> shows the urgent notice first visually but it comes last in the source.</span></li>
+            <li><span class="wcag">1.1.1</span><span class="what"><strong>Decorative divider has alt text.</strong> A spacer image carries <code class="inline-code">alt="horizontal line"</code> and should be empty.</span></li>
+            <li><span class="wcag">2.4.4</span><span class="what"><strong>PDF link lacks detail.</strong> The handbook link gives no file type or size, and the document needs its own accessibility check.</span></li>
+          </ul>
+        </div>
+      </div>
+    </li>
+
+    <li>
+      <h3>Fix issues one at a time</h3>
+      <p>Type <strong>fix</strong> and the plugin walks through the issues in order. For each one it shows the problem, who it affects, and the exact change it proposes, then waits. Nothing is edited until you approve it. Here is the first issue.</p>
+      <div class="cli">
+        <div class="cli-label"><span class="cli-badge">Claude Code</span> The fix prompt for one issue.</div>
+        <div class="cli-screen">
+          <span class="cli-line"><span class="cli-caret" aria-hidden="true">&gt;</span>fix</span>
+          <span class="cli-line"><span class="out">&nbsp;</span></span>
+          <span class="cli-line"><span class="key">PROBLEM</span> <span class="out">(2.1.1 / 4.1.2, Critical)</span></span>
+          <span class="cli-line"><span class="out">"Register Now" is a &lt;div&gt; with an onclick handler. A keyboard</span></span>
+          <span class="cli-line"><span class="out">user cannot focus it or press it, so they cannot submit the form.</span></span>
+          <span class="cli-line"><span class="out">&nbsp;</span></span>
+          <span class="cli-line"><span class="key">FIX</span></span>
+          <span class="cli-line"><span class="out">Replace the div with a real &lt;button type="submit"&gt;, which is</span></span>
+          <span class="cli-line"><span class="out">keyboard operable and announced as a button by screen readers.</span></span>
+          <span class="cli-line"><span class="out">&nbsp;</span></span>
+          <span class="cli-line"><span class="out">[y] Apply fix&nbsp;&nbsp;[s] Skip&nbsp;&nbsp;[q] Quit</span></span>
+          <span class="cli-line"><span class="cli-caret" aria-hidden="true">&gt;</span>y</span>
+          <span class="cli-line"><span class="ok">Applied. Marked fixed. Next issue...</span></span>
+        </div>
+      </div>
+      <p>Press <kbd>y</kbd> to apply, <kbd>s</kbd> to skip, or <kbd>q</kbd> to stop. Work down the list until the critical and serious issues are gone. You can stop any time and pick up later.</p>
+    </li>
+
+    <li>
+      <h3>Track progress and re-audit</h3>
+      <p>The plugin saves its progress to a <code class="inline-code">.wcag-progress.json</code> file in the folder, so a long audit can span more than one sitting. When you come back, it tells you what is fixed and what remains. After you finish a pass, run the audit again to confirm the count has dropped and nothing new slipped in.</p>
+    </li>
+  </ol>
+
+  <div class="callout">
+    <span class="callout-label">Try it on the broken page only</span>
+    <p>If you are practicing, apply the fixes to your downloaded copy, not to a real page yet. The point of this example is to see the full find-and-fix loop on a page where you already know the answers.</p>
+  </div>
+</section>
+
+<!-- OTHER MODES -->
+<section class="module" aria-labelledby="modes-title">
+  <span class="module-num">Two more ways to use it</span>
+  <h2 id="modes-title">The plugin does more than full audits</h2>
+  <p>A full audit is one of three ways the same plugin works. The other two fit smaller moments in a normal workflow.</p>
+
+  <ul class="modes">
+    <li class="mode">
+      <h3>Quick Check a single piece</h3>
+      <p>When you only want to review one part of a page, ask about that part. The plugin checks just that piece and reports inline, with no full audit and no progress file.</p>
+      <span class="ex"><span class="cli-caret" aria-hidden="true">&gt;</span>check the registration form on this page for accessibility</span>
+    </li>
+    <li class="mode">
+      <h3>Build it right from the start</h3>
+      <p>When Claude writes new web code with the plugin installed, it applies the same rules as it builds, so labels, contrast, focus styles, and semantic structure are correct in the first draft instead of being fixed later.</p>
+      <span class="ex"><span class="cli-caret" aria-hidden="true">&gt;</span>build an RSVP form for our open house</span>
+    </li>
+  </ul>
+  <p style="margin-top:20px;">For the full background on what the plugin enforces and where human testing still matters, see the <a href="index.html">15 checkpoints training page</a>.</p>
+</section>
+
+</main>
+
+<footer>
+  <p>EUSD IT · Run an accessibility audit, a worked example · building accessible web pages with Claude</p>
+  <p><a href="index.html">Back to the 15 Accessibility Checkpoints</a></p>
+</footer>
+
+</div>
+
+</body>
+</html>

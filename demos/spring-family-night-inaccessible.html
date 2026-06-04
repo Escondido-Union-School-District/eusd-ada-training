@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spring Family Night Registration</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* No replacement focus style provided */
+    *:focus { outline: none; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+      color: #2a2a2a;
+      background: #ffffff;
+      line-height: 1.6;
+    }
+    a { color: #1b5e8c; }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 32px;
+      border-bottom: 1px solid #e3e8ee;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .logo { width: 48px; height: 48px; }
+    .brand-text { font-weight: 700; color: #1b3a5c; font-size: 18px; line-height: 1.2; }
+    .brand-text small { display: block; font-weight: 400; font-size: 12px; color: #6b7785; }
+    .site-nav ul { list-style: none; display: flex; gap: 24px; }
+    .site-nav a { text-decoration: none; color: #3a4a5a; font-size: 15px; }
+    .site-nav a:hover { color: #1b3a5c; }
+
+    .hero {
+      background: linear-gradient(135deg, #1b3a5c 0%, #2d5a87 100%);
+      color: #ffffff;
+      padding: 56px 32px;
+      text-align: center;
+    }
+    .hero h1 { font-size: 40px; letter-spacing: 0.5px; margin-bottom: 16px; }
+
+    /* DEMO BUG (WCAG 1.4.4 Resize Text / 1.4.12 Text Spacing):
+       A fixed-PX height combined with overflow:hidden. At default zoom the box
+       is tall enough to show all the text. But the width is viewport-relative
+       (vw), so zooming in (Ctrl +) shrinks the CSS viewport, the paragraph
+       reflows onto more lines, and the box -- frozen at 150px -- silently
+       clips the bottom. By ~200% the date/time/location line is gone.
+       (Exact threshold depends on window width; tuned for a typical
+       ~1280-1920px window.) The accessible fix is min-height + no overflow
+       clipping so the box grows with its content. */
+    .hero-subtitle-wrap {
+      width: 46vw;
+      height: 150px;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+    /* Fixed pixel font size that will not scale */
+    .hero-subtitle { font-size: 14px; color: #dbe6f0; }
+    .hero-meta { margin-top: 14px; font-size: 14px; color: #cdddec; }
+    .hero-meta strong { color: #ffffff; }
+
+    main { max-width: 880px; margin: 0 auto; padding: 40px 32px; }
+
+    .announcements { display: flex; flex-direction: column; gap: 12px; margin-bottom: 8px; }
+    .notice {
+      background: #fff8e1;
+      border-left: 4px solid #f0a830;
+      padding: 12px 16px;
+      border-radius: 4px;
+      font-size: 15px;
+    }
+    /* Pulled to the top visually, but last in source order */
+    .notice-important {
+      order: -1;
+      background: #fdecea;
+      border-left-color: #d9534f;
+    }
+
+    /* Decorative divider implemented as an image */
+    .divider-img { display: block; width: 100%; height: 8px; margin: 30px 0; }
+
+    h4 { font-size: 22px; color: #1b3a5c; margin: 30px 0 12px; }
+
+    /* Heading tag used purely for visual styling of a form section label */
+    .field-heading { font-size: 19px; color: #1b3a5c; margin: 26px 0 14px; }
+
+    p { margin: 14px 0; }
+
+    /* Low-contrast body text */
+    .muted { color: #999999; }
+
+    .schedule {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 1px;
+      background: #e3e8ee;
+      border: 1px solid #e3e8ee;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .schedule .cell { background: #ffffff; padding: 12px 16px; font-size: 15px; }
+    .schedule .time { font-weight: 600; color: #1b3a5c; }
+    .schedule .head { background: #1b3a5c; color: #ffffff; font-weight: 600; }
+
+    form { margin-top: 8px; }
+    .form-row { margin-bottom: 16px; }
+    input, select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #c4ccd6;
+      border-radius: 6px;
+      font-size: 15px;
+      font-family: inherit;
+      color: #2a2a2a;
+      background: #ffffff;
+    }
+    /* Faint placeholder text */
+    input::placeholder { color: #c0c0c0; }
+    select.empty { color: #c0c0c0; }
+
+    /* Required field indicated only by a red border */
+    .required-field { border: 2px solid #d9534f; }
+
+    /* "Button" implemented as a div */
+    .btn {
+      display: inline-block;
+      background: #f0a830;
+      color: #1b3a5c;
+      font-weight: 700;
+      padding: 14px 36px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+      margin-top: 6px;
+    }
+    .btn:hover { background: #e69a1f; }
+
+    .resource {
+      margin-top: 24px;
+      padding: 16px 18px;
+      background: #f5f7fa;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    .video-wrap { margin: 24px 0 8px; }
+    .video-wrap video { width: 100%; max-height: 480px; border-radius: 8px; background: #000; }
+
+    .site-footer {
+      background: #f5f7fa;
+      padding: 24px 32px;
+      text-align: center;
+      color: #6b7785;
+      font-size: 14px;
+      margin-top: 48px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="brand">
+      <img class="logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCI+PHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiByeD0iMTAiIGZpbGw9IiMxYjNhNWMiLz48dGV4dCB4PSIyNCIgeT0iMzEiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNmZmZmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkxFPC90ZXh0Pjwvc3ZnPg==">
+      <div class="brand-text">Lincoln Elementary<small>Escondido Union School District</small></div>
+    </div>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/events">Events</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Spring Family Night</h1>
+    <div class="hero-subtitle-wrap">
+      <p class="hero-subtitle">Join the Lincoln Elementary community for an evening of hands-on learning, food, and fun for the whole family. Explore STEAM activity stations, enjoy a picnic dinner on the lawn, browse our spring book fair, and enter the raffle for some great prizes. We can't wait to celebrate spring together with our students and their families!</p>
+      <p class="hero-meta"><strong>Friday, May 30, 2026</strong> &nbsp;•&nbsp; 5:30 PM – 8:00 PM &nbsp;•&nbsp; Lincoln Elementary Multipurpose Room</p>
+    </div>
+  </section>
+
+  <main>
+
+    <div class="announcements">
+      <p class="notice">Free to attend. Light dinner provided — please register so we can plan accordingly.</p>
+      <p class="notice notice-important">Space is limited! Registration closes Thursday, May 29 at 5:00 PM.</p>
+    </div>
+
+    <p class="muted">Spring Family Night is one of our most popular events of the year, bringing together hundreds of students, parents, and staff. Please complete the short registration form below so we can make sure there's enough food and seating for everyone.</p>
+
+    <img class="divider-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgOCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI4IiByeD0iNCIgZmlsbD0iI2YwYTgzMCIvPjwvc3ZnPg==" alt="horizontal line">
+
+    <h4>What to Expect</h4>
+    <p>An evening built around our students. Wander between activity stations, grab dinner with neighbors, and stick around for the raffle. Younger siblings are welcome too — there will be a craft corner just for them.</p>
+
+    <h4>Evening Schedule</h4>
+    <div class="schedule">
+      <div class="cell head time">Time</div>
+      <div class="cell head">Activity</div>
+
+      <div class="cell time">5:30 PM</div>
+      <div class="cell">Check-in &amp; Welcome</div>
+
+      <div class="cell time">6:00 PM</div>
+      <div class="cell">STEAM Activity Stations</div>
+
+      <div class="cell time">6:45 PM</div>
+      <div class="cell">Family Picnic Dinner</div>
+
+      <div class="cell time">7:15 PM</div>
+      <div class="cell">Spring Book Fair &amp; Raffle</div>
+
+      <div class="cell time">7:45 PM</div>
+      <div class="cell">Closing &amp; Group Photo</div>
+    </div>
+
+    <p style="margin-top:20px;">Looking for our other school events this spring? Click here to view the school calendar: <a href="/calendar">Click here</a>.</p>
+
+    <h4>Watch Last Year's Highlights</h4>
+    <div class="video-wrap">
+      <!-- DEMO BUG (WCAG 1.2.2 / 1.2.3): native video skin, but NO captions track and NO transcript -->
+      <video controls preload="metadata" poster="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjQ1MCIgZmlsbD0iIzFiM2E1YyIvPjxjaXJjbGUgY3g9IjQwMCIgY3k9IjE5MCIgcj0iNDYiIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9IjAuOTIiLz48cG9seWdvbiBwb2ludHM9IjM4NSwxNjggMzg1LDIxMiA0MjAsMTkwIiBmaWxsPSIjMWIzYTVjIi8+PHRleHQgeD0iNDAwIiB5PSIzMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIzNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNmZmZmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlNwcmluZyBGYW1pbHkgTmlnaHQ8L3RleHQ+PHRleHQgeD0iNDAwIiB5PSIzNDAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMiIgZmlsbD0iI2RiZTZmMCIgdGV4dC1hbmNob3I9Im1pZGRsZSI+MjAyNSBIaWdobGlnaHRzPC90ZXh0Pjwvc3ZnPg==">
+        <source src="spring-family-night-highlights.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <h3 class="field-heading">Register Your Family</h3>
+    <form onsubmit="return false;">
+      <div class="form-row">
+        <input type="text" placeholder="Parent / Guardian Name">
+      </div>
+      <div class="form-row">
+        <input type="email" class="required-field" placeholder="Email Address">
+      </div>
+      <div class="form-row">
+        <input type="tel" placeholder="Phone Number">
+      </div>
+      <div class="form-row">
+        <input type="text" placeholder="Child's Grade (e.g. 3rd)">
+      </div>
+      <div class="btn" onclick="alert('Thank you for registering for Spring Family Night!')">Register Now</div>
+    </form>
+
+    <div class="resource">
+      Please review the <a href="/files/Parent_Handbook.pdf">Parent Handbook</a> before attending the event.
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    Lincoln Elementary &nbsp;•&nbsp; 123 Lincoln Ave, Escondido, CA 92027 &nbsp;•&nbsp; (760) 555-0142
+  </footer>
+
+</body>
+</html>
