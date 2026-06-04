@@ -877,10 +877,11 @@
 /plugin update ada-wcag@eusd-ada-toolkit</pre>
     </div>
   </div>
+  <p>Run both, in that order: the first refreshes the marketplace catalog so Claude sees the new version, and the second installs it. This marketplace doesn't auto-refresh, so the update command alone can miss a new release.</p>
 
   <div class="callout">
     <span class="callout-label">What the plugin doesn't cover</span>
-    <p>The plugin doesn't replace human testing. Still tab through your work, zoom to 200%, run axe DevTools, and test with a screen reader. The plugin and automated checks handle much of the work; the manual workflow below covers the rest.</p>
+    <p>The plugin doesn't replace <a href="#layers-title">human testing</a>. Still tab through your work, zoom to 200%, run axe DevTools, and test with a screen reader. The plugin and automated checks handle much of the work; the manual workflow below covers the rest.</p>
   </div>
 </section>
 
@@ -2080,11 +2081,10 @@ button:focus { outline: 1px dotted #ccc; }
 <section class="module" aria-labelledby="wrap-title">
   <span class="module-num">Next steps</span>
   <h2 id="wrap-title">Getting started</h2>
-  <p>Three things to do:</p>
+  <p>Two things to do:</p>
   <ol>
     <li>Install the ada-wcag plugin — the two slash commands shown above. Every new build then inherits the checkpoints automatically.</li>
-    <li>Pick one page or component you've recently shipped, open it in Claude Code, and type "run accessibility audit". See what comes back, and fix whatever isn't a pass.</li>
-    <li>Install axe DevTools in your browser. Run it on three pages today.</li>
+    <li>Install <a href="https://chromewebstore.google.com/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd">axe DevTools for Chrome</a>, and try Lighthouse (built into Chrome's DevTools) on a page.</li>
   </ol>
   <div class="callout">
     <span class="callout-label">EUSD resources</span>
