@@ -29,6 +29,7 @@
     --code-comment: #9e978a;
     --code-key: #e8b34a;
     --code-str: #87b48a;
+    --code-good: #8fcf9a;
     --focus: #1d4ed8;
 
     --font-display: 'Inter Tight', system-ui, sans-serif;
@@ -618,6 +619,7 @@
     margin-right: 10px;
     user-select: none;
   }
+  .cli-screen .ok { color: var(--code-good); }
 
   /* Contrast tool */
   .contrast-tool {
@@ -875,16 +877,34 @@
   </figure>
 
   <h3>How to keep it updated</h3>
-  <p>The plugin keeps improving: new checkpoints get added and existing rules get sharpened as the WCAG standard evolves and as we learn from real audits. You only receive those changes when you update, so every so often type these two slash commands at the Claude prompt (the same place you installed it):</p>
+  <p>The plugin keeps improving: new checkpoints get added and existing rules get sharpened as the WCAG standard evolves and as we learn from real audits. You only receive those changes when you update. Updating is two steps: refresh the catalog, then apply the update.</p>
+
+  <p><strong>Step 1. Refresh the catalog.</strong> At the Claude prompt, run this. It pulls the latest published version from the marketplace and reports back (for example, "Updated 1 marketplace").</p>
   <figure class="cli">
-    <figcaption class="cli-label"><span class="cli-badge">Claude Code</span> Type these at the Claude prompt, not your terminal.</figcaption>
+    <figcaption class="cli-label"><span class="cli-badge">Claude Code</span> At the Claude prompt.</figcaption>
     <div class="cli-screen">
       <span class="cli-line"><span class="cli-caret" aria-hidden="true">&gt;</span>/plugin marketplace update eusd-ada-toolkit</span>
-      <span class="cli-line"><span class="cli-caret" aria-hidden="true">&gt;</span>/plugin update ada-wcag@eusd-ada-toolkit</span>
     </div>
   </figure>
-  <p>Run both, in that order: the first refreshes the marketplace catalog so Claude sees the new version, and the second installs it. This marketplace doesn't auto-refresh, so the update command alone can miss a new release.</p>
-  <p><strong>Tip:</strong> to skip the first command next time, turn on auto-update for this marketplace once. At the Claude prompt run <code class="inline-code">/plugin</code>, open the <strong>Marketplaces</strong> tab, select <strong>eusd-ada-toolkit</strong>, and enable auto-update. After that, <code class="inline-code">/plugin update ada-wcag@eusd-ada-toolkit</code> on its own will pull each new release. (Third-party marketplaces ship with auto-update off, which is why it stays manual until you switch it on.)</p>
+
+  <p><strong>Step 2. Apply the update.</strong> Open the plugin manager, go to the <strong>Installed</strong> tab, select <strong>ada-wcag</strong>, and choose update. (Typing <code class="inline-code">/plugin update ada-wcag@eusd-ada-toolkit</code> just opens this same manager without any message, so go straight to the manager instead.)</p>
+  <figure class="cli">
+    <figcaption class="cli-label"><span class="cli-badge">Claude Code</span> At the Claude prompt.</figcaption>
+    <div class="cli-screen">
+      <span class="cli-line"><span class="cli-caret" aria-hidden="true">&gt;</span>/plugin</span>
+    </div>
+  </figure>
+
+  <p><strong>Prefer a one-liner?</strong> From your regular terminal (not the Claude prompt), this checks for an update, applies it, and prints the result. A restart applies anything it pulled.</p>
+  <figure class="cli">
+    <figcaption class="cli-label"><span class="cli-badge">Terminal</span> Your regular command line.</figcaption>
+    <div class="cli-screen">
+      <span class="cli-line"><span class="cli-caret" aria-hidden="true">$</span>claude plugin update ada-wcag@eusd-ada-toolkit</span>
+      <span class="cli-line"><span class="ok">✔ ada-wcag is already at the latest version (1.2.0).</span></span>
+    </div>
+  </figure>
+
+  <p><strong>Tip:</strong> to skip Step 1 each time, turn on auto-update for this marketplace once. At the Claude prompt run <code class="inline-code">/plugin</code>, open the <strong>Marketplaces</strong> tab, select <strong>eusd-ada-toolkit</strong>, and enable auto-update. After that Claude refreshes this marketplace for you. (Third-party marketplaces ship with auto-update off, which is why it stays manual until you switch it on.)</p>
 
   <div class="callout">
     <span class="callout-label">What the plugin doesn't cover</span>
