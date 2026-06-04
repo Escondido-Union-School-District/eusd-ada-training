@@ -786,9 +786,9 @@
 <!-- HERO -->
 <section class="hero" aria-labelledby="hero-title">
   <p class="eyebrow">A training for Claude coders</p>
-  <h1 id="hero-title">The <em>15 accessibility checkpoints</em> every EUSD web project must meet — and the plugin that enforces them.</h1>
+  <h1 id="hero-title">The <em>15 accessibility checkpoints</em> every EUSD web project must meet.</h1>
   <p class="lede">
-    Fifteen specific things every EUSD page, form, embed, and document has to get right to meet the ADA and WCAG 2.1 AA. This training takes each one in turn — what it is, what it looks like done right, and how to verify it — and shows you how to get Claude to handle them on the first pass.
+    Fifteen specific things every EUSD page, form, embed, and document has to get right to meet the ADA and WCAG 2.1 AA. This training takes each one in turn — what it is, what it looks like done right, and how to verify it. It also documents the ada-wcag plugin, which applies these standards automatically when Claude writes web code.
   </p>
   <dl class="hero-stats">
     <div>
@@ -836,19 +836,19 @@
 
 <!-- ============= THE PLUGIN ============= -->
 <section class="module" aria-labelledby="plugin-title">
-  <span class="module-num">Do it automatically</span>
-  <h2 id="plugin-title">The plugin that does this for you</h2>
-  <p>There's a Claude Code plugin called <strong>ada-wcag</strong> that makes Claude follow these 15 checkpoints automatically when it writes web code — so nobody has to remember to ask for them. Install it once and every page, form, and component Claude builds starts from these standards, instead of having them bolted on afterward.</p>
+  <span class="module-num">Automation</span>
+  <h2 id="plugin-title">The ada-wcag plugin</h2>
+  <p><strong>ada-wcag</strong> is a Claude Code plugin that applies these 15 checkpoints automatically when Claude writes web code. Once it's installed, every page, form, and component Claude builds starts from these standards rather than having them added afterward.</p>
 
-  <h3>Three things it does for you</h3>
+  <h3>What it does</h3>
   <ul class="check-list">
     <li><strong>As you build</strong><span>The plugin guides the code Claude writes so it meets the 15 checkpoints from the start — semantic HTML, labels, contrast, focus indicators, and the rest, by default.</span></li>
     <li><strong>For a quick check</strong><span>Ask Claude something like <em>"check this header for accessibility"</em> and it reviews just that piece, inline, without running the full audit.</span></li>
     <li><strong>Before launch</strong><span>Type <em>"run accessibility audit"</em> and Claude walks you through every issue, sorted by severity, one fix at a time.</span></li>
   </ul>
 
-  <h3>Above and beyond the 15</h3>
-  <p>The 15 checkpoints are the spine of an EUSD audit, but the plugin enforces the <strong>complete WCAG 2.2 AA standard</strong> — so it also catches things that aren't on the list above. The most useful extras:</p>
+  <h3>Beyond the 15 checkpoints</h3>
+  <p>The 15 checkpoints are the core of an EUSD audit, but the plugin applies the <strong>complete WCAG 2.2 AA standard</strong>, so it also covers items that aren't on the list above. The most common of these:</p>
   <ul class="check-list">
     <li><strong>Target size</strong><span>Buttons, links, and controls must be at least 24×24 pixels — 44×44 for parent- and mobile-facing pages — so they're easy to tap (WCAG 2.5.8).</span></li>
     <li><strong>Dragging alternatives</strong><span>Anything you reorder or move by dragging must also work by click or keyboard (WCAG 2.5.7).</span></li>
@@ -879,8 +879,8 @@
   </div>
 
   <div class="callout">
-    <span class="callout-label">What's still on you</span>
-    <p>The plugin doesn't replace human testing. Still tab through your work, zoom to 200%, run axe DevTools, and listen to a screen reader once in a while. The plugin gets you 80% of the way there; the workflow below gets you the rest.</p>
+    <span class="callout-label">What the plugin doesn't cover</span>
+    <p>The plugin doesn't replace human testing. Still tab through your work, zoom to 200%, run axe DevTools, and test with a screen reader. The plugin and automated checks handle much of the work; the manual workflow below covers the rest.</p>
   </div>
 </section>
 
@@ -1964,7 +1964,7 @@ button:focus { outline: 1px dotted #ccc; }
 <!-- ============= AXE & DEVTOOLS ============= -->
 <section class="module" aria-labelledby="axe-title">
   <span class="module-num">Free tooling</span>
-  <h2 id="axe-title">axe DevTools — your free accessibility scanner</h2>
+  <h2 id="axe-title">axe DevTools — a free accessibility scanner</h2>
   <p><strong>axe DevTools</strong> is a free browser extension from Deque Systems. It scans the page you're viewing and reports accessibility problems — missing labels, contrast failures, ARIA misuse, heading-order skips, and more. It's the industry-standard automated checker, and it's what "run axe DevTools" means everywhere in this training. Automated tools catch roughly 30–40% of issues on their own, so axe is a fast first pass — not the whole job.</p>
 
   <h3>How to install it</h3>
@@ -2078,9 +2078,9 @@ button:focus { outline: 1px dotted #ccc; }
 
 <!-- ============= WRAP ============= -->
 <section class="module" aria-labelledby="wrap-title">
-  <span class="module-num">Wrap</span>
-  <h2 id="wrap-title">Take this back to your projects</h2>
-  <p>Three things to do this week:</p>
+  <span class="module-num">Next steps</span>
+  <h2 id="wrap-title">Getting started</h2>
+  <p>Three things to do:</p>
   <ol>
     <li>Install the ada-wcag plugin — the two slash commands shown above. Every new build then inherits the checkpoints automatically.</li>
     <li>Pick one page or component you've recently shipped, open it in Claude Code, and type "run accessibility audit". See what comes back, and fix whatever isn't a pass.</li>
@@ -2088,7 +2088,7 @@ button:focus { outline: 1px dotted #ccc; }
   </ol>
   <div class="callout">
     <span class="callout-label">EUSD resources</span>
-    <p>The <a href="https://github.com/Escondido-Union-School-District/eusd-ada-toolkit">eusd-ada-toolkit</a> on GitHub packages the ada-wcag plugin you install into any Claude Code project for enforcement at code-generation time. This training and the plugin are designed to work together.</p>
+    <p>The <a href="https://github.com/Escondido-Union-School-District/eusd-ada-toolkit">eusd-ada-toolkit</a> on GitHub packages the ada-wcag plugin for installation into any Claude Code project. The training and the plugin are meant to be used together.</p>
   </div>
 </section>
 
@@ -2096,7 +2096,6 @@ button:focus { outline: 1px dotted #ccc; }
 
 <footer>
   <p>EUSD IT · The 15 Accessibility Checkpoints · building accessible web pages with Claude</p>
-  <p>Built to be the thing it's teaching: try tabbing through it, zooming to 200%, auditing it with axe.</p>
 </footer>
 
 </div>
