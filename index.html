@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The 15 Accessibility Checkpoints — EUSD Web Standards</title>
+<title>The 15 Accessibility Checkpoints: EUSD Web Standards</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=JetBrains+Mono:wght@400;600&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
   :root {
     --bg: #fafaf7;
@@ -31,7 +31,7 @@
     --code-str: #87b48a;
     --focus: #1d4ed8;
 
-    --font-display: 'Fraunces', Georgia, serif;
+    --font-display: 'Inter Tight', system-ui, sans-serif;
     --font-body: 'Inter Tight', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
@@ -136,9 +136,8 @@
     max-width: 20ch;
   }
   h1 em {
-    font-style: italic;
+    font-style: normal;
     color: var(--accent);
-    font-weight: 600;
   }
   .lede {
     font-size: 20px;
@@ -146,30 +145,6 @@
     max-width: 62ch;
     margin: 0 0 28px;
   }
-  .hero-stats {
-    display: flex;
-    gap: 36px;
-    flex-wrap: wrap;
-    padding-top: 24px;
-    border-top: 1px solid var(--line-soft);
-    margin-top: 32px;
-  }
-  .hero-stats dt {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--ink-mute);
-    margin-bottom: 4px;
-  }
-  .hero-stats dd {
-    margin: 0;
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 28px;
-    color: var(--ink);
-  }
-
   /* Index grid */
   .toc-section {
     padding: 56px 0;
@@ -597,6 +572,53 @@
     border-left: 2px solid var(--accent);
   }
 
+  /* Claude Code CLI command block: distinguishes slash commands from terminal commands */
+  .cli {
+    margin: 20px 0;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    background: var(--bg-elev);
+    box-shadow: var(--shadow-sm);
+  }
+  .cli-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .cli-badge {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--accent-ink);
+    background: var(--accent);
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+  .cli-screen {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    padding: 16px 20px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+  .cli-line { display: block; white-space: pre; }
+  .cli-caret {
+    color: var(--code-key);
+    font-weight: 700;
+    margin-right: 10px;
+    user-select: none;
+  }
+
   /* Contrast tool */
   .contrast-tool {
     background: var(--bg-elev);
@@ -785,36 +807,18 @@
 
 <!-- HERO -->
 <section class="hero" aria-labelledby="hero-title">
-  <p class="eyebrow">A training for Claude coders</p>
-  <h1 id="hero-title">The <em>15 accessibility checkpoints</em> every EUSD web project must meet.</h1>
+  <p class="eyebrow">WCAG training for Claude coders</p>
+  <h1 id="hero-title">The <em>15</em> Accessibility Checkpoints</h1>
   <p class="lede">
-    Fifteen specific things every EUSD page, form, embed, and document has to get right to meet the ADA and WCAG 2.1 AA. This training takes each one in turn — what it is, what it looks like done right, and how to verify it. It also documents the ada-wcag plugin, which applies these standards automatically when Claude writes web code.
+    Fifteen specific things every EUSD page, form, embed, and document has to get right to meet the ADA and WCAG 2.1 AA. This training takes each one in turn: what it is, what it looks like done right, and how to verify it. It also documents the ada-wcag plugin, which applies these standards automatically when Claude writes web code.
   </p>
-  <dl class="hero-stats">
-    <div>
-      <dt>Checkpoints</dt>
-      <dd>15</dd>
-    </div>
-    <div>
-      <dt>Time</dt>
-      <dd>~60 min</dd>
-    </div>
-    <div>
-      <dt>Standard</dt>
-      <dd>WCAG 2.1 AA</dd>
-    </div>
-    <div>
-      <dt>Audience</dt>
-      <dd>Claude coders</dd>
-    </div>
-  </dl>
 </section>
 
 <!-- INDEX -->
 <section class="toc-section" aria-labelledby="toc-title">
   <span class="module-num">Index</span>
   <h2 id="toc-title">The fifteen checkpoints</h2>
-  <p>These are the fifteen checkpoints every EUSD web project must meet. Each is its own section below, with what it means, a demo, and how to check it.</p>
+  <p>These fifteen are the accessibility checks you can confirm yourself by testing a page: tabbing through it, zooming in, running a screen reader. Each is its own section below, with what it means, a demo, and how to check it. They cover the core of an EUSD audit, but not all of WCAG. The <a href="#plugin-title">ada-wcag plugin</a> applies WCAG 2.2 AA rules as it builds, covering many more criteria than these fifteen, including checks that are easy to miss by hand.</p>
   <ol class="toc-grid">
     <li><a href="#p1"><span class="toc-num">01</span><span class="toc-title">Proper keyboard access</span></a></li>
     <li><a href="#p2"><span class="toc-num">02</span><span class="toc-title">Proper alt text</span></a></li>
@@ -842,42 +846,45 @@
 
   <h3>What it does</h3>
   <ul class="check-list">
-    <li><strong>As you build</strong><span>The plugin guides the code Claude writes so it meets the 15 checkpoints from the start — semantic HTML, labels, contrast, focus indicators, and the rest, by default.</span></li>
+    <li><strong>As you build</strong><span>The plugin guides the code Claude writes so it meets the 15 checkpoints from the start: semantic HTML, labels, contrast, focus indicators, and the rest, by default.</span></li>
     <li><strong>For a quick check</strong><span>Ask Claude something like <em>"check this header for accessibility"</em> and it reviews just that piece, inline, without running the full audit.</span></li>
     <li><strong>Before launch</strong><span>Type <em>"run accessibility audit"</em> and Claude walks you through every issue, sorted by severity, one fix at a time.</span></li>
   </ul>
 
   <h3>Beyond the 15 checkpoints</h3>
-  <p>The 15 checkpoints are the core of an EUSD audit, but the plugin applies the <strong>complete WCAG 2.2 AA standard</strong>, so it also covers items that aren't on the list above. The most common of these:</p>
+  <p>The 15 checkpoints are the ones you can readily verify by testing, and the core of an EUSD audit. The plugin applies <strong>WCAG 2.2 AA</strong> rules well beyond them, so it also catches issues that are harder to spot by hand, including the ones below. The most common:</p>
   <ul class="check-list">
-    <li><strong>Target size</strong><span>Buttons, links, and controls must be at least 24×24 pixels — 44×44 for parent- and mobile-facing pages — so they're easy to tap (WCAG 2.5.8).</span></li>
+    <li><strong>Target size</strong><span>Buttons, links, and controls must be at least 24×24 pixels (44×44 for parent- and mobile-facing pages) so they're easy to tap (WCAG 2.5.8).</span></li>
     <li><strong>Dragging alternatives</strong><span>Anything you reorder or move by dragging must also work by click or keyboard (WCAG 2.5.7).</span></li>
     <li><strong>Focus never hidden</strong><span>A sticky header, cookie banner, or fixed footer must not cover the element you've tabbed to (WCAG 2.4.11).</span></li>
     <li><strong>Consistent naming &amp; order</strong><span>The same control is labeled the same way on every page, and navigation stays in the same order from page to page (WCAG 3.2.4, 3.2.3).</span></li>
     <li><strong>Help in a predictable place</strong><span>Contact and help links sit in a consistent spot across the site (WCAG 3.2.6).</span></li>
-    <li><strong>More than one way to find things</strong><span>Multi-page sites offer at least two ways to locate content — menu, search, sitemap, or breadcrumbs (WCAG 2.4.5).</span></li>
+    <li><strong>More than one way to find things</strong><span>Multi-page sites offer at least two ways to locate content: menu, search, sitemap, or breadcrumbs (WCAG 2.4.5).</span></li>
     <li><strong>Helpful error messages</strong><span>When a form rejects input, the message says how to fix it, not just that it's wrong (WCAG 3.3.3).</span></li>
-    <li><strong>Guarding consequential actions</strong><span>Submissions with real consequences — payments, legal commitments, deletions — get a confirmation step or an undo (WCAG 3.3.4).</span></li>
+    <li><strong>Guarding consequential actions</strong><span>Submissions with real consequences (payments, legal commitments, deletions) get a confirmation step or an undo (WCAG 3.3.4).</span></li>
   </ul>
 
   <h3>How to install it</h3>
-  <p>These are <strong>slash commands you type at the Claude prompt</strong> — start Claude Code in your project first (run <code class="inline-code">claude</code> in your terminal), then enter them inside that session, not in your regular command line. Once per machine you use Claude Code on:</p>
-  <div class="demo">
-    <div class="demo-panel">
-<pre>/plugin marketplace add Escondido-Union-School-District/eusd-ada-toolkit
-/plugin install ada-wcag@eusd-ada-toolkit</pre>
+  <p>These are <strong>slash commands you type at the Claude prompt</strong>. Start Claude Code in your project first (run <code class="inline-code">claude</code> in your terminal), then enter them inside that session, not in your regular command line. Once per machine you use Claude Code on:</p>
+  <figure class="cli">
+    <figcaption class="cli-label"><span class="cli-badge">Claude Code</span> Type these at the Claude prompt, not your terminal.</figcaption>
+    <div class="cli-screen">
+      <span class="cli-line"><span class="cli-caret" aria-hidden="true">&gt;</span>/plugin marketplace add Escondido-Union-School-District/eusd-ada-toolkit</span>
+      <span class="cli-line"><span class="cli-caret" aria-hidden="true">&gt;</span>/plugin install ada-wcag@eusd-ada-toolkit</span>
     </div>
-  </div>
+  </figure>
 
   <h3>How to keep it updated</h3>
-  <p>The plugin keeps improving — new checkpoints get added and existing rules get sharpened as the WCAG standard evolves and as we learn from real audits. You only receive those changes when you update, so every so often type these two slash commands at the Claude prompt (the same place you installed it):</p>
-  <div class="demo">
-    <div class="demo-panel">
-<pre>/plugin marketplace update eusd-ada-toolkit
-/plugin update ada-wcag@eusd-ada-toolkit</pre>
+  <p>The plugin keeps improving: new checkpoints get added and existing rules get sharpened as the WCAG standard evolves and as we learn from real audits. You only receive those changes when you update, so every so often type these two slash commands at the Claude prompt (the same place you installed it):</p>
+  <figure class="cli">
+    <figcaption class="cli-label"><span class="cli-badge">Claude Code</span> Type these at the Claude prompt, not your terminal.</figcaption>
+    <div class="cli-screen">
+      <span class="cli-line"><span class="cli-caret" aria-hidden="true">&gt;</span>/plugin marketplace update eusd-ada-toolkit</span>
+      <span class="cli-line"><span class="cli-caret" aria-hidden="true">&gt;</span>/plugin update ada-wcag@eusd-ada-toolkit</span>
     </div>
-  </div>
+  </figure>
   <p>Run both, in that order: the first refreshes the marketplace catalog so Claude sees the new version, and the second installs it. This marketplace doesn't auto-refresh, so the update command alone can miss a new release.</p>
+  <p><strong>Tip:</strong> to skip the first command next time, turn on auto-update for this marketplace once. At the Claude prompt run <code class="inline-code">/plugin</code>, open the <strong>Marketplaces</strong> tab, select <strong>eusd-ada-toolkit</strong>, and enable auto-update. After that, <code class="inline-code">/plugin update ada-wcag@eusd-ada-toolkit</code> on its own will pull each new release. (Third-party marketplaces ship with auto-update off, which is why it stays manual until you switch it on.)</p>
 
   <div class="callout">
     <span class="callout-label">What the plugin doesn't cover</span>
@@ -898,8 +905,8 @@
   <div class="point-grid">
     <div class="point-block">
       <span class="point-block-label">What it means</span>
-      <p>Every interactive thing on the page — buttons, links, form inputs, custom widgets — must be reachable and operable using only the keyboard. <kbd>Tab</kbd> moves forward, <kbd>Shift</kbd>+<kbd>Tab</kbd> moves back, <kbd>Enter</kbd> activates links and buttons, <kbd>Space</kbd> activates buttons and toggles checkboxes, arrow keys move within widgets like menus or radio groups, and <kbd>Esc</kbd> closes modals and popovers.</p>
-      <p>Users who can't or don't use a mouse — including people with motor disabilities, low vision, and anyone using a screen reader — rely on this completely. A button you can only click with a mouse doesn't exist for them.</p>
+      <p>Every interactive thing on the page (buttons, links, form inputs, custom widgets) must be reachable and operable using only the keyboard. <kbd>Tab</kbd> moves forward, <kbd>Shift</kbd>+<kbd>Tab</kbd> moves back, <kbd>Enter</kbd> activates links and buttons, <kbd>Space</kbd> activates buttons and toggles checkboxes, arrow keys move within widgets like menus or radio groups, and <kbd>Esc</kbd> closes modals and popovers.</p>
+      <p>Users who can't or don't use a mouse (including people with motor disabilities, low vision, and anyone using a screen reader) rely on this completely. A button you can only click with a mouse doesn't exist for them.</p>
     </div>
 
     <div class="point-block">
@@ -924,10 +931,10 @@
           </div>
         </div>
         <div class="demo-panel" id="p1-code" role="tabpanel" aria-labelledby="p1-tab-code" hidden>
-<pre><span class="c">/* Inaccessible — keyboard cannot reach or activate */</span>
+<pre><span class="c">/* Inaccessible: keyboard cannot reach or activate */</span>
 &lt;div class=<span class="s">"clicky"</span> onclick=<span class="s">"deleteIt()"</span>&gt;Delete&lt;/div&gt;
 
-<span class="c">/* Accessible — keyboard and screen reader work natively */</span>
+<span class="c">/* Accessible: keyboard and screen reader work natively */</span>
 &lt;<span class="k">button</span> type=<span class="s">"button"</span> onclick=<span class="s">"deleteIt()"</span>&gt;Delete&lt;/<span class="k">button</span>&gt;</pre>
         </div>
       </div>
@@ -964,10 +971,10 @@
       <span class="point-block-label">What it means</span>
       <p>Every <code class="inline-code">&lt;img&gt;</code> tag needs an <code class="inline-code">alt</code> attribute. The value depends on the image's role:</p>
       <ul>
-        <li><strong>Informative images</strong> get descriptive alt text that conveys what the image communicates — not what it looks like. "Smiling student receives certificate from principal" beats "person holding paper."</li>
-        <li><strong>Decorative images</strong> (purely visual flourishes, dividers, repeated logos) get <code class="inline-code">alt=""</code>. The empty string is a signal to screen readers to skip the image entirely. Omitting <code class="inline-code">alt</code> entirely is <em>not</em> the same — screen readers will then read the filename out loud.</li>
+        <li><strong>Informative images</strong> get descriptive alt text that conveys what the image communicates, not what it looks like. "Smiling student receives certificate from principal" beats "person holding paper."</li>
+        <li><strong>Decorative images</strong> (purely visual flourishes, dividers, repeated logos) get <code class="inline-code">alt=""</code>. The empty string is a signal to screen readers to skip the image entirely. Omitting <code class="inline-code">alt</code> entirely is <em>not</em> the same. Screen readers will then read the filename out loud.</li>
         <li><strong>Functional images</strong> (an icon that's the only content of a link or button) get alt text that describes the action: "Search", not "magnifying glass."</li>
-        <li><strong>Complex images</strong> (charts, diagrams, infographics) get short alt text plus a longer description nearby in text — because there's too much information for an alt attribute.</li>
+        <li><strong>Complex images</strong> (charts, diagrams, infographics) get short alt text plus a longer description nearby in text, because there's too much information for an alt attribute.</li>
         <li><strong>Images of text</strong> should mostly not exist. If unavoidable, the alt text is the exact text shown.</li>
       </ul>
     </div>
@@ -979,25 +986,25 @@
           <button class="demo-tab" role="tab" aria-selected="true" aria-controls="p2-code" id="p2-tab-code" data-target="p2-code">Code</button>
         </div>
         <div class="demo-panel" id="p2-code" role="tabpanel" aria-labelledby="p2-tab-code">
-<pre><span class="c">/* Bad — filename gets read aloud */</span>
+<pre><span class="c">/* Bad: filename gets read aloud */</span>
 &lt;img src=<span class="s">"IMG_4521.jpg"</span>&gt;
 
-<span class="c">/* Bad — describes appearance, not meaning */</span>
+<span class="c">/* Bad: describes appearance, not meaning */</span>
 &lt;img src=<span class="s">"award.jpg"</span> alt=<span class="s">"a person holding paper"</span>&gt;
 
-<span class="c">/* Good — informative */</span>
+<span class="c">/* Good: informative */</span>
 &lt;img src=<span class="s">"award.jpg"</span>
      alt=<span class="s">"Principal Garcia presenting the Distinguished School plaque to Quantum Academy staff"</span>&gt;
 
-<span class="c">/* Good — decorative */</span>
+<span class="c">/* Good: decorative */</span>
 &lt;img src=<span class="s">"divider-flourish.svg"</span> alt=<span class="s">""</span>&gt;
 
-<span class="c">/* Good — functional icon in a link */</span>
+<span class="c">/* Good: functional icon in a link */</span>
 &lt;a href=<span class="s">"/search"</span>&gt;
   &lt;img src=<span class="s">"magnifier.svg"</span> alt=<span class="s">"Search"</span>&gt;
 &lt;/a&gt;
 
-<span class="c">/* Good — complex image with companion description */</span>
+<span class="c">/* Good: complex image with companion description */</span>
 &lt;figure&gt;
   &lt;img src=<span class="s">"enrollment-chart.png"</span>
        alt=<span class="s">"Bar chart: EUSD enrollment by grade, 2024–25. Detailed data below."</span>&gt;
@@ -1020,7 +1027,7 @@
     <div class="point-block">
       <span class="point-block-label">How to check</span>
       <ul class="check-list">
-        <li><strong>Browser DevTools</strong><span>Inspect any image. Confirm it has an <code>alt</code> attribute. Read the value — does it describe what the image is communicating?</span></li>
+        <li><strong>Browser DevTools</strong><span>Inspect any image. Confirm it has an <code>alt</code> attribute. Read the value. Does it describe what the image is communicating?</span></li>
         <li><strong>axe DevTools</strong><span>Flags missing alt attributes and some empty-but-shouldn't-be-empty cases.</span></li>
         <li><strong>Bookmarklet test</strong><span>Use a "show alt text" browser bookmarklet (or the WAVE extension) to see every image's alt text inline on the page. Decorative images should appear empty, informative ones should describe the content.</span></li>
         <li><strong>The screen-reader test</strong><span>Turn on VoiceOver (<kbd>Cmd</kbd>+<kbd>F5</kbd>) or NVDA. Navigate through the images. The announcement should make sense in the flow.</span></li>
@@ -1042,7 +1049,7 @@
   <div class="point-grid">
     <div class="point-block">
       <span class="point-block-label">What it means</span>
-      <p>The text inside a link should tell you where it goes — even when read in isolation, with no surrounding context. Screen reader users often navigate by pulling up a list of all links on a page. If every link says "click here" or "read more," that list is useless.</p>
+      <p>The text inside a link should tell you where it goes, even when read in isolation, with no surrounding context. Screen reader users often navigate by pulling up a list of all links on a page. If every link says "click here" or "read more," that list is useless.</p>
       <p>The rule of thumb: a link's text should be meaningful when read on its own.</p>
     </div>
 
@@ -1058,7 +1065,7 @@
             <div class="demo-render-cell broken">
               <h3>Inaccessible</h3>
               <p style="margin:0;">Read our updated wellness policy. <a href="#" onclick="event.preventDefault()">Click here.</a></p>
-              <p style="font-size:13px;margin:14px 0 0;color:var(--ink-mute);">A link list shows "click here" — destination unknown.</p>
+              <p style="font-size:13px;margin:14px 0 0;color:var(--ink-mute);">A link list shows "click here": destination unknown.</p>
             </div>
             <div class="demo-render-cell fixed">
               <h3>Accessible</h3>
@@ -1075,7 +1082,7 @@ Read our updated wellness policy. &lt;a href=<span class="s">"/policy.pdf"</span
 Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness policy&lt;/a&gt;
 (PDF, 2 pages).
 
-<span class="c">/* Also good — when icon-only links need a label */</span>
+<span class="c">/* Also good: when icon-only links need a label */</span>
 &lt;a href=<span class="s">"/twitter"</span> aria-label=<span class="s">"EUSD on Twitter"</span>&gt;
   &lt;img src=<span class="s">"twitter.svg"</span> alt=<span class="s">""</span>&gt;
 &lt;/a&gt;</pre>
@@ -1111,8 +1118,8 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
   <div class="point-grid">
     <div class="point-block">
       <span class="point-block-label">What it means</span>
-      <p>Color can never be the only way you communicate something. Required form fields shown only in red, error messages indicated only by a red border, a "save" button that's the only green one in the row — these all fail for users with color blindness, low vision, or anyone viewing the page in grayscale or high-contrast mode.</p>
-      <p>Color is fine as a <em>reinforcement</em>. The rule is that another signal — text, an icon, an underline, a label, a pattern — has to carry the meaning too.</p>
+      <p>Color can never be the only way you communicate something. Required form fields shown only in red, error messages indicated only by a red border, a "save" button that's the only green one in the row. These all fail for users with color blindness, low vision, or anyone viewing the page in grayscale or high-contrast mode.</p>
+      <p>Color is fine as a <em>reinforcement</em>. The rule is that another signal (text, an icon, an underline, a label, a pattern) has to carry the meaning too.</p>
     </div>
 
     <div class="point-block">
@@ -1127,7 +1134,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
             <div class="demo-render-cell broken">
               <h3>Inaccessible</h3>
               <p style="margin:0 0 6px;">Required fields are <span style="color:#c00;font-weight:600;">in red</span>.</p>
-              <p style="margin:0;font-size:14px;">Name: <input class="bad-input" type="text" aria-label="Name (required, indicated by color only — intentionally bad example)" style="border-color:#c00;" /></p>
+              <p style="margin:0;font-size:14px;">Name: <input class="bad-input" type="text" aria-label="Name (required, indicated by color only, intentionally bad example)" style="border-color:#c00;" /></p>
               <p style="font-size:13px;margin:14px 0 0;color:var(--ink-mute);">If you can't see red, you can't tell which fields are required.</p>
             </div>
             <div class="demo-render-cell fixed">
@@ -1142,11 +1149,11 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
           </div>
         </div>
         <div class="demo-panel" id="p4-code" role="tabpanel" aria-labelledby="p4-tab-code" hidden>
-<pre><span class="c">/* Bad — red is the only signal */</span>
+<pre><span class="c">/* Bad: red is the only signal */</span>
 &lt;label&gt;Name&lt;/label&gt;
 &lt;input style=<span class="s">"border-color: red;"</span>&gt;
 
-<span class="c">/* Good — visible asterisk + programmatic required + sr-only text */</span>
+<span class="c">/* Good: visible asterisk + programmatic required + sr-only text */</span>
 &lt;label for=<span class="s">"name"</span>&gt;
   Name &lt;span aria-hidden=<span class="s">"true"</span>&gt;*&lt;/span&gt;
   &lt;span class=<span class="s">"sr-only"</span>&gt;(required)&lt;/span&gt;
@@ -1188,7 +1195,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
       <ul>
         <li><strong>4.5:1</strong> for normal-size text (under 18pt regular, under 14pt bold)</li>
         <li><strong>3:1</strong> for large text (18pt+ or 14pt+ bold)</li>
-        <li><strong>3:1</strong> for UI components and graphical objects — button borders, form input borders, focus indicators, meaningful icons</li>
+        <li><strong>3:1</strong> for UI components and graphical objects: button borders, form input borders, focus indicators, meaningful icons</li>
       </ul>
       <p>The common failures: gray placeholder text, light gray secondary text, low-contrast input borders, and disabled states.</p>
     </div>
@@ -1203,20 +1210,20 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
         <div class="demo-panel" id="p5-render" role="tabpanel" aria-labelledby="p5-tab-render">
           <div class="demo-render-pair">
             <div class="demo-render-cell broken">
-              <h3>Inaccessible — ~2.3:1</h3>
+              <h3>Inaccessible: ~2.3:1</h3>
               <div class="bad-low-contrast">This gray-on-near-white text fails AA for normal text (needs 4.5:1).</div>
             </div>
             <div class="demo-render-cell fixed">
-              <h3>Accessible — 14:1+</h3>
+              <h3>Accessible: 14:1+</h3>
               <div class="good-contrast">This text uses the page's ink color on the elevated background. Well above 4.5:1.</div>
             </div>
           </div>
         </div>
         <div class="demo-panel" id="p5-code" role="tabpanel" aria-labelledby="p5-tab-code" hidden>
-<pre><span class="c">/* Bad — ~2.3:1 contrast */</span>
+<pre><span class="c">/* Bad: ~2.3:1 contrast */</span>
 .muted { color: #b0b0b0; background: #fafafa; }
 
-<span class="c">/* Good — 14:1+ contrast */</span>
+<span class="c">/* Good: 14:1+ contrast */</span>
 .text { color: #14110f; background: #ffffff; }</pre>
         </div>
       </div>
@@ -1260,7 +1267,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
         <li><strong>Built-in browser tool</strong><span>Chrome/Edge DevTools: inspect any text, the color picker shows the contrast ratio inline with AA/AAA pass markers.</span></li>
         <li><strong>The contrast checker above</strong><span>For palette decisions before code exists.</span></li>
         <li><strong>axe DevTools / Lighthouse</strong><span>Both catch contrast failures on the rendered page.</span></li>
-        <li><strong>Don't forget the four states</strong><span>Default, hover, focus, disabled. Each can have different colors — each must pass.</span></li>
+        <li><strong>Don't forget the four states</strong><span>Default, hover, focus, disabled. Each can have different colors. Each must pass.</span></li>
       </ul>
     </div>
   </div>
@@ -1279,7 +1286,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
   <div class="point-grid">
     <div class="point-block">
       <span class="point-block-label">What it means</span>
-      <p>The <code class="inline-code">&lt;table&gt;</code> element is for tabular data — information with a meaningful relationship between rows and columns. It is not a layout tool. Modern CSS (flexbox, grid) handles layout.</p>
+      <p>The <code class="inline-code">&lt;table&gt;</code> element is for tabular data: information with a meaningful relationship between rows and columns. It is not a layout tool. Modern CSS (flexbox, grid) handles layout.</p>
       <p>When a table really is the right element, it needs structural markup so screen readers can navigate it: <code class="inline-code">&lt;thead&gt;</code> and <code class="inline-code">&lt;tbody&gt;</code>, header cells (<code class="inline-code">&lt;th&gt;</code>) with <code class="inline-code">scope</code>, and a <code class="inline-code">&lt;caption&gt;</code> describing what the table contains.</p>
     </div>
 
@@ -1299,7 +1306,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
                 <div>Quantum Academy</div><div>K–8</div><div>412</div>
                 <div>Reidy Creek</div><div>K–5</div><div>521</div>
               </div>
-              <p style="font-size:13px;margin:14px 0 0;color:var(--ink-mute);">Either a <code>&lt;table&gt;</code> used for layout, or a "table" of divs with no headers — both fail.</p>
+              <p style="font-size:13px;margin:14px 0 0;color:var(--ink-mute);">Either a <code>&lt;table&gt;</code> used for layout, or a "table" of divs with no headers: both fail.</p>
             </div>
             <div class="demo-render-cell fixed">
               <h3>Real data table with structure</h3>
@@ -1318,18 +1325,18 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
           </div>
         </div>
         <div class="demo-panel" id="p6-code" role="tabpanel" aria-labelledby="p6-tab-code" hidden>
-<pre><span class="c">/* Bad — table used for page layout */</span>
+<pre><span class="c">/* Bad: table used for page layout */</span>
 &lt;<span class="k">table</span>&gt;
   &lt;tr&gt;&lt;td&gt;Sidebar&lt;/td&gt;&lt;td&gt;Main content&lt;/td&gt;&lt;/tr&gt;
 &lt;/<span class="k">table</span>&gt;
 
-<span class="c">/* Bad — data table with no structure */</span>
+<span class="c">/* Bad: data table with no structure */</span>
 &lt;<span class="k">table</span>&gt;
   &lt;tr&gt;&lt;td&gt;School&lt;/td&gt;&lt;td&gt;Grade&lt;/td&gt;&lt;td&gt;Enrollment&lt;/td&gt;&lt;/tr&gt;
   &lt;tr&gt;&lt;td&gt;Quantum&lt;/td&gt;&lt;td&gt;K-8&lt;/td&gt;&lt;td&gt;412&lt;/td&gt;&lt;/tr&gt;
 &lt;/<span class="k">table</span>&gt;
 
-<span class="c">/* Good — structured data table */</span>
+<span class="c">/* Good: structured data table */</span>
 &lt;<span class="k">table</span>&gt;
   &lt;caption&gt;EUSD enrollment, fall 2025&lt;/caption&gt;
   &lt;thead&gt;
@@ -1387,7 +1394,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
         <li>Required fields use the <code class="inline-code">required</code> attribute and a visible indicator.</li>
         <li>Errors are identified in <em>text</em> (not just color), tied to the input via <code class="inline-code">aria-describedby</code>, and the input has <code class="inline-code">aria-invalid="true"</code>.</li>
         <li>Related inputs (like radio groups or address blocks) are wrapped in a <code class="inline-code">&lt;fieldset&gt;</code> with a <code class="inline-code">&lt;legend&gt;</code>.</li>
-        <li>Submit buttons have descriptive text — "Submit application", not "Submit".</li>
+        <li>Submit buttons have descriptive text: "Submit application", not "Submit".</li>
         <li><code class="inline-code">autocomplete</code> attributes are set so browsers and password managers can help users fill faster.</li>
       </ul>
     </div>
@@ -1420,7 +1427,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
 <pre><span class="c">/* Bad */</span>
 &lt;input type=<span class="s">"text"</span> placeholder=<span class="s">"Email address"</span>&gt;
 
-<span class="c">/* Good — label, correct type, autocomplete, required, help text linked */</span>
+<span class="c">/* Good: label, correct type, autocomplete, required, help text linked */</span>
 &lt;<span class="k">label</span> for=<span class="s">"email"</span>&gt;
   Email address &lt;span aria-hidden=<span class="s">"true"</span>&gt;*&lt;/span&gt;
   &lt;span class=<span class="s">"sr-only"</span>&gt;(required)&lt;/span&gt;
@@ -1432,14 +1439,14 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
        aria-describedby=<span class="s">"email-help"</span>&gt;
 &lt;span id=<span class="s">"email-help"</span>&gt;We'll send your confirmation here.&lt;/span&gt;
 
-<span class="c">/* Good — radio group wrapped in fieldset */</span>
+<span class="c">/* Good: radio group wrapped in fieldset */</span>
 &lt;fieldset&gt;
   &lt;legend&gt;Preferred contact method&lt;/legend&gt;
   &lt;label&gt;&lt;input type=<span class="s">"radio"</span> name=<span class="s">"contact"</span> value=<span class="s">"email"</span>&gt; Email&lt;/label&gt;
   &lt;label&gt;&lt;input type=<span class="s">"radio"</span> name=<span class="s">"contact"</span> value=<span class="s">"phone"</span>&gt; Phone&lt;/label&gt;
 &lt;/fieldset&gt;
 
-<span class="c">/* Good — error linked to input */</span>
+<span class="c">/* Good: error linked to input */</span>
 &lt;<span class="k">label</span> for=<span class="s">"zip"</span>&gt;ZIP code&lt;/<span class="k">label</span>&gt;
 &lt;input id=<span class="s">"zip"</span>
        type=<span class="s">"text"</span>
@@ -1498,13 +1505,13 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
           <button class="demo-tab" role="tab" aria-selected="true" aria-controls="p8-code" id="p8-tab-code" data-target="p8-code">Code</button>
         </div>
         <div class="demo-panel" id="p8-code" role="tabpanel" aria-labelledby="p8-tab-code">
-<pre><span class="c">/* Bad — headings used for size; multiple h1s; level skips */</span>
+<pre><span class="c">/* Bad: headings used for size; multiple h1s; level skips */</span>
 &lt;h1&gt;Welcome&lt;/h1&gt;
 &lt;h1&gt;About Us&lt;/h1&gt;
 &lt;h4&gt;Our History&lt;/h4&gt;
 &lt;div style=<span class="s">"font-size:24px;font-weight:bold;"</span>&gt;Our Programs&lt;/div&gt;
 
-<span class="c">/* Good — single h1, no skipped levels, descriptive */</span>
+<span class="c">/* Good: single h1, no skipped levels, descriptive */</span>
 &lt;h1&gt;Quantum Academy&lt;/h1&gt;
 
   &lt;h2&gt;About our school&lt;/h2&gt;
@@ -1525,10 +1532,10 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
     <div class="point-block">
       <span class="point-block-label">How to check</span>
       <ul class="check-list">
-        <li><strong>The headings outline test</strong><span>Install the HeadingsMap browser extension. The page outline should read like a logical table of contents — not a random scatter.</span></li>
+        <li><strong>The headings outline test</strong><span>Install the HeadingsMap browser extension. The page outline should read like a logical table of contents, not a random scatter.</span></li>
         <li><strong>One h1 only</strong><span>In DevTools console: <code>document.querySelectorAll('h1').length</code>. Should be 1.</span></li>
         <li><strong>No skipped levels</strong><span>axe DevTools and Lighthouse both flag this.</span></li>
-        <li><strong>Screen reader headings list</strong><span>VoiceOver: <kbd>VO</kbd>+<kbd>U</kbd> → Headings. Read down — does the structure make sense?</span></li>
+        <li><strong>Screen reader headings list</strong><span>VoiceOver: <kbd>VO</kbd>+<kbd>U</kbd> → Headings. Read down. Does the structure make sense?</span></li>
       </ul>
     </div>
   </div>
@@ -1547,10 +1554,10 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
   <div class="point-grid">
     <div class="point-block">
       <span class="point-block-label">What it means</span>
-      <p>Anything embedded from another source — a YouTube video, a Google Map, a third-party form, a social media widget — has two accessibility concerns:</p>
+      <p>Anything embedded from another source (a YouTube video, a Google Map, a third-party form, a social media widget) has two accessibility concerns:</p>
       <ol>
         <li><strong>The embed itself.</strong> Every <code class="inline-code">&lt;iframe&gt;</code> needs a <code class="inline-code">title</code> attribute that describes what's inside it. Screen readers announce this so users know what they're encountering before they enter it.</li>
-        <li><strong>The content inside.</strong> If you embed a YouTube video, the video itself has to be accessible (captioned — see point 12). If you embed a form, that form needs labels. You can't outsource compliance — if it's on your page, it counts.</li>
+        <li><strong>The content inside.</strong> If you embed a YouTube video, the video itself has to be accessible (captioned, see point 12). If you embed a form, that form needs labels. You can't outsource compliance: if it's on your page, it counts.</li>
       </ol>
       <p>Common offenders: Google Maps iframes with no title, YouTube embeds of un-captioned videos, third-party signup forms with poor labeling, Twitter/X embeds with no fallback.</p>
     </div>
@@ -1562,21 +1569,21 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
           <button class="demo-tab" role="tab" aria-selected="true" aria-controls="p9-code" id="p9-tab-code" data-target="p9-code">Code</button>
         </div>
         <div class="demo-panel" id="p9-code" role="tabpanel" aria-labelledby="p9-tab-code">
-<pre><span class="c">/* Bad — no title, screen reader announces "iframe" */</span>
+<pre><span class="c">/* Bad: no title, screen reader announces "iframe" */</span>
 &lt;iframe src=<span class="s">"https://www.google.com/maps/embed?..."</span>&gt;&lt;/iframe&gt;
 
-<span class="c">/* Good — descriptive title */</span>
+<span class="c">/* Good: descriptive title */</span>
 &lt;iframe src=<span class="s">"https://www.google.com/maps/embed?..."</span>
         title=<span class="s">"Map of Quantum Academy campus, 2245 East Valley Parkway"</span>&gt;
 &lt;/iframe&gt;
 
-<span class="c">/* Good — YouTube embed with title, allowing fullscreen for keyboard */</span>
+<span class="c">/* Good: YouTube embed with title, allowing fullscreen for keyboard */</span>
 &lt;iframe src=<span class="s">"https://www.youtube.com/embed/VIDEO_ID"</span>
         title=<span class="s">"Superintendent's spring 2026 update"</span>
         allowfullscreen&gt;
 &lt;/iframe&gt;
 
-<span class="c">/* Good — for decorative iframes (rare), title is still required by WCAG */</span>
+<span class="c">/* Good: for decorative iframes (rare), title is still required by WCAG */</span>
 &lt;iframe src=<span class="s">"decorative.html"</span>
         title=<span class="s">"Decorative animation"</span>
         aria-hidden=<span class="s">"true"</span>
@@ -1618,7 +1625,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
       <p>Two related criteria:</p>
       <ul>
         <li><strong>1.4.4 Resize text</strong>: text can be enlarged to 200% without loss of content or functionality.</li>
-        <li><strong>1.4.10 Reflow</strong>: content reflows to a 320 CSS-pixel-wide viewport without requiring two-dimensional scrolling. In practice: pinch-zoom on mobile, browser zoom on desktop — content should adapt, not get cut off or require side-scrolling.</li>
+        <li><strong>1.4.10 Reflow</strong>: content reflows to a 320 CSS-pixel-wide viewport without requiring two-dimensional scrolling. In practice: pinch-zoom on mobile, browser zoom on desktop. Content should adapt, not get cut off or require side-scrolling.</li>
       </ul>
       <p>The common failures: fixed-pixel widths on containers, text in images that doesn't scale, fixed positioning that overlaps content at zoom, and horizontal layouts that don't collapse to a single column at small widths.</p>
     </div>
@@ -1660,7 +1667,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
   <div class="point-grid">
     <div class="point-block">
       <span class="point-block-label">What it means</span>
-      <p>If your page links to a PDF, a Word doc, a PowerPoint, or any other downloadable file, <strong>that file has to meet the same accessibility standard as the page itself.</strong> Linking to an inaccessible PDF doesn't put it out of scope — it puts you out of compliance.</p>
+      <p>If your page links to a PDF, a Word doc, a PowerPoint, or any other downloadable file, <strong>that file has to meet the same accessibility standard as the page itself.</strong> Linking to an inaccessible PDF doesn't put it out of scope. It puts you out of compliance.</p>
       <p>For each document type, the baseline requirements:</p>
       <ul>
         <li><strong>PDFs</strong>: tagged structure, real text (not scanned images), document language set, reading order verified, alt text on images, document title set in metadata, no contrast or color-only failures.</li>
@@ -1672,7 +1679,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
 
     <div class="point-block">
       <span class="point-block-label">Tooling</span>
-      <p>These are the checks the web developer runs — most work from inside the app that produced the file:</p>
+      <p>These are the checks the web developer runs. Most work from inside the app that produced the file:</p>
       <ul>
         <li><strong>Word, PowerPoint, Excel</strong>: Review → Check Accessibility. Built-in.</li>
         <li><strong>Adobe Acrobat Pro</strong>: Tools → Accessibility → Accessibility Check. Generates a report.</li>
@@ -1683,7 +1690,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
     <div class="point-block">
       <div class="callout">
         <span class="callout-label">EUSD reality check</span>
-        <p>The single biggest source of accessibility findings for K-12 districts is linked PDFs — board agendas, policies, flyers, forms. Build a habit: every time you link a document, send the file to the web developer to check before publishing the link.</p>
+        <p>The single biggest source of accessibility findings for K-12 districts is linked PDFs: board agendas, policies, flyers, forms. Build a habit: every time you link a document, send the file to the web developer to check before publishing the link.</p>
       </div>
       <p class="plugin-note">The plugin enforces this as you write code and flags it during an audit.</p>
     </div>
@@ -1712,13 +1719,13 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
   <div class="point-grid">
     <div class="point-block">
       <span class="point-block-label">What it means</span>
-      <p>Every video with audio content needs <strong>accurate, human-edited captions</strong>. YouTube's auto-generated captions are not sufficient — they're explicitly treated as failing for ADA compliance. Auto-captions misspell names, mishear domain-specific words, and miss speaker changes.</p>
+      <p>Every video with audio content needs <strong>accurate, human-edited captions</strong>. YouTube's auto-generated captions are not sufficient. They're explicitly treated as failing for ADA compliance. Auto-captions misspell names, mishear domain-specific words, and miss speaker changes.</p>
       <p>Requirements:</p>
       <ul>
         <li><strong>Captions</strong> for all pre-recorded video with audio (1.2.2, Level A). Must be accurate, properly timed, and identify speakers when not visible.</li>
-        <li><strong>Audio description</strong> for content shown visually that isn't conveyed in the audio (1.2.5, Level AA). For most school videos this means: don't have important content appear only on screen — say it out loud too.</li>
+        <li><strong>Audio description</strong> for content shown visually that isn't conveyed in the audio (1.2.5, Level AA). For most school videos this means: don't have important content appear only on screen. Say it out loud too.</li>
         <li><strong>Transcripts</strong> for audio-only content like podcasts (1.2.1, Level A).</li>
-        <li><strong>Live video</strong> with audio needs real-time captions if it's broadcast (1.2.4, Level AA) — this applies to board meeting livestreams.</li>
+        <li><strong>Live video</strong> with audio needs real-time captions if it's broadcast (1.2.4, Level AA). This applies to board meeting livestreams.</li>
       </ul>
     </div>
 
@@ -1726,7 +1733,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
       <span class="point-block-label">In practice</span>
       <ul>
         <li><strong>YouTube</strong>: upload your own SRT file. Or use YouTube's auto-captions as a starting point and edit them in YouTube Studio. Never publish with raw auto-captions.</li>
-        <li><strong>Vimeo</strong>: same — upload your own caption file.</li>
+        <li><strong>Vimeo</strong>: same. Upload your own caption file.</li>
         <li><strong>Self-hosted</strong>: use the <code class="inline-code">&lt;track&gt;</code> element with a WebVTT file.</li>
         <li><strong>For Thrillshare-hosted video</strong>: confirm captions exist on the underlying YouTube/Vimeo source, since Thrillshare embeds it.</li>
       </ul>
@@ -1782,15 +1789,15 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
   <div class="point-grid">
     <div class="point-block">
       <span class="point-block-label">What it means</span>
-      <p>The order content appears in the HTML source determines what screen readers announce, and what keyboard users Tab through. That order must match the visual reading order — top to bottom, left to right (or right to left for RTL languages).</p>
-      <p>Problems happen when CSS rearranges content visually without changing the source order. Flexbox <code class="inline-code">order</code>, CSS Grid <code class="inline-code">grid-area</code>, and negative margins can all produce a layout where what looks first on screen is last in the source — or vice versa.</p>
+      <p>The order content appears in the HTML source determines what screen readers announce, and what keyboard users Tab through. That order must match the visual reading order: top to bottom, left to right (or right to left for RTL languages).</p>
+      <p>Problems happen when CSS rearranges content visually without changing the source order. Flexbox <code class="inline-code">order</code>, CSS Grid <code class="inline-code">grid-area</code>, and negative margins can all produce a layout where what looks first on screen is last in the source, or vice versa.</p>
     </div>
 
     <div class="point-block">
       <span class="point-block-label">See it</span>
       <div class="reading-order-demo">
         <div class="ro-cell">
-          <h3>Bad — visual ≠ source order</h3>
+          <h3>Bad: visual ≠ source order</h3>
           <p style="font-size:13px;margin:0 0 10px;color:var(--ink-mute);">Visual: 1 → 2 → 3 → 4. Source: 3 → 1 → 4 → 2.</p>
           <div class="ro-block bad">3. Source position 3 (shown first visually)</div>
           <div class="ro-block bad">1. Source position 1 (shown second)</div>
@@ -1799,7 +1806,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
           <p style="font-size:13px;margin:10px 0 0;color:var(--ink-mute);">A screen reader reads "3, 1, 4, 2." Nothing makes sense.</p>
         </div>
         <div class="ro-cell">
-          <h3>Good — visual = source order</h3>
+          <h3>Good: visual = source order</h3>
           <p style="font-size:13px;margin:0 0 10px;color:var(--ink-mute);">Visual: 1 → 2 → 3 → 4. Source: 1 → 2 → 3 → 4.</p>
           <div class="ro-block good">1. First in source, first visually</div>
           <div class="ro-block good">2. Second in source, second visually</div>
@@ -1838,20 +1845,20 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
   <div class="point-grid">
     <div class="point-block">
       <span class="point-block-label">What it means</span>
-      <p>A "skip to main content" link is the first focusable element on every page. It lets keyboard users — who would otherwise have to Tab through the entire site header and navigation on every single page — jump straight to the content.</p>
-      <p>It's typically visually hidden until it receives focus, at which point it appears (this page has one — press <kbd>Tab</kbd> from the URL bar and it shows up at top left).</p>
-      <p>Requirements: it must be the first focusable element, it must be visible when focused, and it must work — clicking it (or pressing Enter on it) moves focus to the main content area.</p>
+      <p>A "skip to main content" link is the first focusable element on every page. It lets keyboard users, who would otherwise have to Tab through the entire site header and navigation on every single page, jump straight to the content.</p>
+      <p>It's typically visually hidden until it receives focus, at which point it appears (this page has one; press <kbd>Tab</kbd> from the URL bar and it shows up at top left).</p>
+      <p>Requirements: it must be the first focusable element, it must be visible when focused, and it must work: clicking it (or pressing Enter on it) moves focus to the main content area.</p>
     </div>
 
     <div class="point-block">
       <span class="point-block-label">See it</span>
-      <p>This page has a working skip link. Try it: reload the page, then press <kbd>Tab</kbd> once. The link appears at the top of the page. Press <kbd>Enter</kbd> — focus moves past the masthead to the main content.</p>
+      <p>This page has a working skip link. Try it: reload the page, then press <kbd>Tab</kbd> once. The link appears at the top of the page. Press <kbd>Enter</kbd>: focus moves past the masthead to the main content.</p>
       <div class="demo">
         <div class="demo-tabs" role="tablist" aria-label="Skip link demo">
           <button class="demo-tab" role="tab" aria-selected="true" aria-controls="p14-code" id="p14-tab-code" data-target="p14-code">Code</button>
         </div>
         <div class="demo-panel" id="p14-code" role="tabpanel" aria-labelledby="p14-tab-code">
-<pre><span class="c">/* HTML — first focusable element on the page */</span>
+<pre><span class="c">/* HTML: first focusable element on the page */</span>
 &lt;body&gt;
   &lt;a href=<span class="s">"#main"</span> class=<span class="s">"skip-link"</span>&gt;Skip to main content&lt;/a&gt;
 
@@ -1862,7 +1869,7 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
   &lt;/main&gt;
 &lt;/body&gt;
 
-<span class="c">/* CSS — visually hidden until focused */</span>
+<span class="c">/* CSS: visually hidden until focused */</span>
 .skip-link {
   position: absolute;
   top: 0;
@@ -1916,26 +1923,26 @@ Read the &lt;a href=<span class="s">"/policy.pdf"</span>&gt;updated wellness pol
       <ul>
         <li>Every focusable element shows a visible focus indicator when focused via keyboard.</li>
         <li>The indicator has at least 3:1 contrast against the surrounding background (WCAG 2.4.11, also AA).</li>
-        <li>The indicator should not be ambiguous — a 1px border change is often not enough.</li>
+        <li>The indicator should not be ambiguous: a 1px border change is often not enough.</li>
         <li>Use <code class="inline-code">:focus-visible</code> rather than <code class="inline-code">:focus</code> to avoid showing the ring when users click with a mouse, where it's unnecessary visual noise.</li>
       </ul>
     </div>
 
     <div class="point-block">
       <span class="point-block-label">See it</span>
-      <p>Tab around this page right now. Every link, button, tab, input, and accordion shows a clear blue ring when it receives focus. That's a custom focus indicator — high contrast, thick enough to see, offset from the element for clarity.</p>
+      <p>Tab around this page right now. Every link, button, tab, input, and accordion shows a clear blue ring when it receives focus. That's a custom focus indicator: high contrast, thick enough to see, offset from the element for clarity.</p>
       <div class="demo">
         <div class="demo-tabs" role="tablist" aria-label="Focus indicator demo">
           <button class="demo-tab" role="tab" aria-selected="true" aria-controls="p15-code" id="p15-tab-code" data-target="p15-code">Code</button>
         </div>
         <div class="demo-panel" id="p15-code" role="tabpanel" aria-labelledby="p15-tab-code">
-<pre><span class="c">/* Bad — removes focus indicator entirely */</span>
+<pre><span class="c">/* Bad: removes focus indicator entirely */</span>
 button:focus { outline: none; }
 
-<span class="c">/* Bad — too subtle, fails contrast */</span>
+<span class="c">/* Bad: too subtle, fails contrast */</span>
 button:focus { outline: 1px dotted #ccc; }
 
-<span class="c">/* Good — custom, high-contrast, only shows for keyboard users */</span>
+<span class="c">/* Good: custom, high-contrast, only shows for keyboard users */</span>
 :focus { outline: none; }
 :focus-visible {
   outline: 3px solid #1d4ed8;
@@ -1965,13 +1972,13 @@ button:focus { outline: 1px dotted #ccc; }
 <!-- ============= AXE & DEVTOOLS ============= -->
 <section class="module" aria-labelledby="axe-title">
   <span class="module-num">Free tooling</span>
-  <h2 id="axe-title">axe DevTools — a free accessibility scanner</h2>
-  <p><strong>axe DevTools</strong> is a free browser extension from Deque Systems. It scans the page you're viewing and reports accessibility problems — missing labels, contrast failures, ARIA misuse, heading-order skips, and more. It's the industry-standard automated checker, and it's what "run axe DevTools" means everywhere in this training. Automated tools catch roughly 30–40% of issues on their own, so axe is a fast first pass — not the whole job.</p>
+  <h2 id="axe-title">axe DevTools: a free accessibility scanner</h2>
+  <p><strong>axe DevTools</strong> is a free browser extension from Deque Systems. It scans the page you're viewing and reports accessibility problems: missing labels, contrast failures, ARIA misuse, heading-order skips, and more. It's the industry-standard automated checker, and it's what "run axe DevTools" means everywhere in this training. Automated tools catch roughly 30–40% of issues on their own, so axe is a fast first pass, not the whole job.</p>
 
   <h3>How to install it</h3>
   <ol>
     <li>Open the <strong>Chrome Web Store</strong> (or <strong>Firefox Add-ons</strong> / <strong>Edge Add-ons</strong>).</li>
-    <li>Search for <strong>axe DevTools</strong> — the publisher is Deque Systems.</li>
+    <li>Search for <strong>axe DevTools</strong>. The publisher is Deque Systems.</li>
     <li>Click <strong>Add to Chrome</strong> → <strong>Add extension</strong>. The free tier is all you need for this.</li>
   </ol>
 
@@ -1983,36 +1990,36 @@ button:focus { outline: 1px dotted #ccc; }
     <li>Click <strong>Scan all of my page</strong>.</li>
     <li>Review the results grouped by severity (Critical, Serious, Moderate, Minor). Click any issue to highlight the element on the page and read the explanation and suggested fix.</li>
   </ol>
-  <p class="plugin-note">Fix what axe finds, then take the same page through the manual checks below — axe can't tell you whether the tab order makes sense or whether a caption is human-edited.</p>
+  <p class="plugin-note">Fix what axe finds, then take the same page through the manual checks below: axe can't tell you whether the tab order makes sense or whether a caption is human-edited.</p>
 
   <h3>Other DevTools checks worth knowing</h3>
   <ul class="check-list">
     <li><strong>Emulate vision deficiencies</strong><span>Open the Command Menu (<code>Ctrl/Cmd+Shift+P</code>), type "Rendering", choose <strong>Show Rendering</strong>, then scroll to <strong>Emulate vision deficiencies</strong> and pick protanopia, deuteranopia, or blurred vision. Confirms you're not relying on color alone (checkpoint 4).</span></li>
     <li><strong>Inspect contrast on any element</strong><span>Right-click text → <strong>Inspect</strong>, then in the <strong>Styles</strong> pane click the small color swatch next to a <code>color</code> value. The picker shows the contrast ratio and whether it passes AA.</span></li>
-    <li><strong>Read an element's name &amp; role</strong><span>In the <strong>Elements</strong> tab, open the <strong>Accessibility</strong> pane to see the computed name, role, and state of whatever you've selected — the same information a screen reader gets.</span></li>
+    <li><strong>Read an element's name &amp; role</strong><span>In the <strong>Elements</strong> tab, open the <strong>Accessibility</strong> pane to see the computed name, role, and state of whatever you've selected, the same information a screen reader gets.</span></li>
   </ul>
 </section>
 
 <!-- ============= LIGHTHOUSE ============= -->
 <section class="module" aria-labelledby="lighthouse-title">
   <span class="module-num">Free tooling</span>
-  <h2 id="lighthouse-title">Lighthouse — a quick accessibility score</h2>
-  <p><strong>Lighthouse</strong> is built into Chrome and Edge — nothing to install. It runs a batch of automated audits and gives the page a <strong>0–100 Accessibility score</strong>, alongside Performance, Best Practices, and SEO. Under the hood its accessibility audits use the same axe-core engine as axe DevTools, so the two rarely disagree — think of Lighthouse as the quick numeric snapshot and axe DevTools as the detailed issue list.</p>
+  <h2 id="lighthouse-title">Lighthouse: a quick accessibility score</h2>
+  <p><strong>Lighthouse</strong> is built into Chrome and Edge. Nothing to install. It runs a batch of automated audits and gives the page a <strong>0–100 Accessibility score</strong>, alongside Performance, Best Practices, and SEO. Under the hood its accessibility audits use the same axe-core engine as axe DevTools, so the two rarely disagree. Think of Lighthouse as the quick numeric snapshot and axe DevTools as the detailed issue list.</p>
 
   <h3>How to run it</h3>
   <ol>
     <li>Open the page in Chrome or Edge.</li>
     <li>Open DevTools (<code class="inline-code">F12</code>) and click the <strong>Lighthouse</strong> tab.</li>
     <li>Under <strong>Categories</strong>, tick <strong>Accessibility</strong> (untick the others for a faster, focused run).</li>
-    <li>Pick a device — <strong>Mobile</strong> or <strong>Desktop</strong>.</li>
+    <li>Pick a device: <strong>Mobile</strong> or <strong>Desktop</strong>.</li>
     <li>Click <strong>Analyze page load</strong> and wait a few seconds for the report.</li>
   </ol>
 
   <h3>How to read the score</h3>
   <ul class="check-list">
-    <li><strong>The number is a starting point, not a verdict</strong><span>The score is weighted, and a <strong>100 does not mean the page is accessible</strong> — it only means the automated checks passed. Lighthouse says as much itself.</span></li>
+    <li><strong>The number is a starting point, not a verdict</strong><span>The score is weighted, and a <strong>100 does not mean the page is accessible</strong>. It only means the automated checks passed. Lighthouse says as much itself.</span></li>
     <li><strong>Work the failing audits</strong><span>Expand each failed item to see the affected elements and a "Learn more" link with the fix. That list is more useful than the number.</span></li>
-    <li><strong>Don't skip "Additional items to manually check"</strong><span>Lighthouse lists checks it <em>can't</em> automate — focus order, meaningful alt text, logical reading order. Those are yours (or the screen-reader pass) to confirm.</span></li>
+    <li><strong>Don't skip "Additional items to manually check"</strong><span>Lighthouse lists checks it <em>can't</em> automate: focus order, meaningful alt text, logical reading order. Those are yours (or the screen-reader pass) to confirm.</span></li>
     <li><strong>It only sees the loaded state</strong><span>It audits the page as it loads; content behind a modal, menu, or interaction won't be tested. Re-run with that content open, or rely on the manual workflow.</span></li>
   </ul>
 
@@ -2025,11 +2032,11 @@ button:focus { outline: 1px dotted #ccc; }
 <!-- ============= WHO CATCHES WHAT ============= -->
 <section class="module" aria-labelledby="layers-title">
   <span class="module-num">Division of labor</span>
-  <h2 id="layers-title">What tools catch — and what only a human can</h2>
+  <h2 id="layers-title">What tools catch, and what only a human can</h2>
   <p>Three things work on accessibility, in layers. Each catches more than the one before it, but none of them replaces the layer above. Knowing where each one stops is how you avoid a false sense of "it passed."</p>
 
   <h3>Automated checkers (axe, Lighthouse)</h3>
-  <p>Fast and mechanical — they run in seconds and catch what can be measured from the rendered page, roughly 30–40% of issues.</p>
+  <p>Fast and mechanical: they run in seconds and catch what can be measured from the rendered page, roughly 30–40% of issues.</p>
   <ul class="check-list">
     <li><strong>They catch</strong><span>Missing <code>alt</code> attributes, missing form labels, text-contrast failures, invalid or misused ARIA, missing <code>lang</code> or page title, heading-level skips, duplicate IDs.</span></li>
     <li><strong>They can't judge meaning</strong><span>Whether <code>alt</code> text is <em>accurate</em>, whether link text makes sense out of context, whether the reading or tab order is <em>logical</em>. A wrong-but-present <code>alt</code> passes just like a correct one.</span></li>
@@ -2037,26 +2044,26 @@ button:focus { outline: 1px dotted #ccc; }
   </ul>
 
   <h3>The ada-wcag skill</h3>
-  <p>It reads and writes the source, so it sees patterns a checker can't — and applies the full WCAG 2.2 AA ruleset as it builds, then again in a guided audit.</p>
+  <p>It reads and writes the source, so it sees patterns a checker can't, and applies a broad set of WCAG 2.2 AA rules as it builds, then again in a guided audit.</p>
   <ul class="check-list">
-    <li><strong>It catches</strong><span>Everything a checker does, plus code-level issues only visible in the source: target sizes, drag-only interactions, focus hidden behind sticky headers, inconsistent labels, missing skip links, color used as the only signal — and it builds these right from the start instead of flagging them after.</span></li>
+    <li><strong>It catches</strong><span>Everything a checker does, plus code-level issues only visible in the source: target sizes, drag-only interactions, focus hidden behind sticky headers, inconsistent labels, missing skip links, color used as the only signal, and it builds these right from the start instead of flagging them after.</span></li>
     <li><strong>It flags, it doesn't guess</strong><span>Where correctness depends on intent or content it can't see, it marks the item "verify manually" rather than passing it silently.</span></li>
     <li><strong>Where it stops</strong><span>Runtime behavior (real focus order and screen-reader output in a browser), contrast that depends on runtime theming, the <em>quality</em> of alt text and captions, linked PDFs and Office files, and cross-page consistency when only one file is open.</span></li>
   </ul>
 
-  <h3>You — the human</h3>
+  <h3>You, the human</h3>
   <p>The only layer that can confirm a page actually works for a real person. Nothing ships on tools alone.</p>
   <ul class="check-list">
     <li><strong>Tab through it</strong><span>No mouse. Confirm every control is reachable, focus is visible, and keys do what they should.</span></li>
     <li><strong>Listen to it</strong><span>Run VoiceOver or NVDA on the key flows. Does the reading order make sense? Are images and controls announced usefully?</span></li>
-    <li><strong>Judge the meaning</strong><span>Is the alt text right, the link text clear, the caption accurate, the color not the only cue? Tools can't make these calls — you can.</span></li>
-    <li><strong>Handle linked documents</strong><span>Send PDFs and Office files to the web developer to check — automated page scans never see inside them.</span></li>
+    <li><strong>Judge the meaning</strong><span>Is the alt text right, the link text clear, the caption accurate, the color not the only cue? Tools can't make these calls. You can.</span></li>
+    <li><strong>Handle linked documents</strong><span>Send PDFs and Office files to the web developer to check. Automated page scans never see inside them.</span></li>
     <li><strong>Sign off</strong><span>Make the final compliance judgment. The tools get you most of the way; this is the rest.</span></li>
   </ul>
 
   <div class="callout">
     <span class="callout-label">The short version</span>
-    <p>Checkers find the mechanical failures. The skill prevents most of them at build time and flags the rest. Only a human can confirm the page is actually usable. Use all three — and never let a green checkmark stand in for tabbing through the page yourself.</p>
+    <p>Checkers find the mechanical failures. The skill prevents most of them at build time and flags the rest. Only a human can confirm the page is actually usable. Use all three, and never let a green checkmark stand in for tabbing through the page yourself.</p>
   </div>
 </section>
 
@@ -2072,7 +2079,7 @@ button:focus { outline: 1px dotted #ccc; }
     <li><strong>Simulate color-blindness and grayscale</strong><span>Chrome DevTools → Rendering → "Emulate vision deficiencies." Confirms point 4.</span></li>
     <li><strong>Run a screen reader on the key flows</strong><span>VoiceOver (Cmd+F5) or NVDA. Walk through the page reading-order; navigate the headings list; navigate the links list; submit the form.</span></li>
     <li><strong>Run the accessibility audit</strong><span>Type "run accessibility audit" and Claude walks you through every issue by severity, one fix at a time. Fix anything flagged, then re-audit.</span></li>
-    <li><strong>For each linked file</strong><span>Send the file to the web developer to check — don't assume a PDF or Office doc is compliant.</span></li>
+    <li><strong>For each linked file</strong><span>Send the file to the web developer to check. Don't assume a PDF or Office doc is compliant.</span></li>
     <li><strong>For each video</strong><span>Confirm captions are human-edited and synced.</span></li>
   </ul>
 </section>
@@ -2083,7 +2090,7 @@ button:focus { outline: 1px dotted #ccc; }
   <h2 id="wrap-title">Getting started</h2>
   <p>Two things to do:</p>
   <ol>
-    <li>Install the ada-wcag plugin — the two slash commands shown above. Every new build then inherits the checkpoints automatically.</li>
+    <li>Install the ada-wcag plugin: the two slash commands shown above. Every new build then inherits the checkpoints automatically.</li>
     <li>Install <a href="https://chromewebstore.google.com/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd">axe DevTools for Chrome</a>, and try Lighthouse (built into Chrome's DevTools) on a page.</li>
   </ol>
   <div class="callout">
